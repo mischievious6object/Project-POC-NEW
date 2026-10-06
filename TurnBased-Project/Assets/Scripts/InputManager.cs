@@ -2,19 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using System;
-
-public class InputHandler : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
-    private HighlightManager _highlightManager;
-    private GridManager _gridManager;
+    private GameManager _gameManager;
 
     private Dot _selectedDot;
 
     private void Awake()
     {
-        _highlightManager = FindFirstObjectByType<HighlightManager>();
-        _gridManager = FindFirstObjectByType<GridManager>();
+        _gameManager = FindFirstObjectByType<GameManager>();
     }
     private void Update()
     {
@@ -31,7 +27,7 @@ public class InputHandler : MonoBehaviour
         if (_selectedDot == null)
         {
             _selectedDot = dot;
-            _highlightManager.HighlightAvailableNeighbors(dot);
+            _gameManager.HighlightManager.HighlightAvailableNeighbors(dot);
         }
     }
 
@@ -42,11 +38,11 @@ public class InputHandler : MonoBehaviour
 
         if (targetDot != null && targetDot != _selectedDot)
         {
-            _gridManager.TryToDrawLine(_selectedDot, targetDot);
+            _gameManager.GridManager.TryToDrawLine(_selectedDot, targetDot);
         }
 
         _selectedDot = null;
-        _highlightManager.ClearHighlights();
+        _gameManager.HighlightManager.ClearHighlights();
     }
 
     private Dot GetDotUnderPointer(Vector2 screenPosition)

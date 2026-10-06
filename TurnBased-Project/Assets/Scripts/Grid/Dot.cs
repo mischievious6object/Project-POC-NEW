@@ -10,9 +10,9 @@ public class Dot : MonoBehaviour, IPointerDownHandler
 
     [SerializeField] private GameObject _highlight;
 
-    private InputHandler _inputHandler;
+    private InputManager _inputHandler;
     
-    public void Initialize(int x, int y, InputHandler inputHandler)
+    public void Initialize(int x, int y, InputManager inputHandler)
     {
         XPos = x; 
         YPos = y;

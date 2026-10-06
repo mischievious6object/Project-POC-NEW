@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+
     [SerializeField] private int _length = 10;
     [SerializeField] private float _spacing = 25f;
 
@@ -15,11 +16,11 @@ public class GridManager : MonoBehaviour
     private Line[,] _verticalLines;
     private Line[,] _horizontalLines;
 
-    private InputHandler _inputHandler;
+    private GameManager _gameManager;
 
     private void Awake()
     {
-        _inputHandler = FindFirstObjectByType<InputHandler>();
+        _gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void Start()
@@ -77,7 +78,7 @@ public class GridManager : MonoBehaviour
 
                 Dot dot = Instantiate(_dotPrefab, _dotsContainer);
                 dot.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
-                dot.Initialize(x, y, _inputHandler);
+                dot.Initialize(x, y, _gameManager.InputHandler);
 
                 _dots[x, y] = dot;
             }
