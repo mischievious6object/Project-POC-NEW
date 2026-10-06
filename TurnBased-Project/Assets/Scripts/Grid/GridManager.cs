@@ -15,9 +15,47 @@ public class GridManager : MonoBehaviour
     private Line[,] _verticalLines;
     private Line[,] _horizontalLines;
 
+    private InputHandler _inputHandler;
+
+    private void Awake()
+    {
+        _inputHandler = FindFirstObjectByType<InputHandler>();
+    }
+
     private void Start()
     {
         CreateGrid();
+    }
+
+    public bool TryToDrawLine(Dot dotA, Dot dotB)
+    {
+        int deltaX = Mathf.Abs(dotA.XPos - dotB.XPos);
+        int deltaY = Mathf.Abs(dotA.YPos - dotB.YPos);
+
+        if (deltaX + deltaY != 1)
+        {
+            return false;
+        }
+
+        Line targetLine;
+        if(deltaX == 0)
+        {
+            int yPos = Mathf.Min(dotA.YPos, dotB.YPos);
+            targetLine = _verticalLines[dotA.XPos, yPos];
+        }
+        else
+        {
+            int xPos = Mathf.Min(dotA.XPos, dotB.XPos);
+            targetLine = _horizontalLines[xPos, dotA.YPos];
+        }
+
+        if (!targetLine.IsDrawn)
+        {
+            targetLine.Draw();
+            return true;
+        }
+
+        return false;
     }
 
     public void CreateGrid()
@@ -39,7 +77,7 @@ public class GridManager : MonoBehaviour
 
                 Dot dot = Instantiate(_dotPrefab, _dotsContainer);
                 dot.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos, yPos);
-                dot.Initialize(x, y);
+                dot.Initialize(x, y, _inputHandler);
 
                 _dots[x, y] = dot;
             }
@@ -85,7 +123,9 @@ public class GridManager : MonoBehaviour
         rectTransform.anchoredPosition = linePos;
 
         Dot dotA = _dots[x, y];
+        dotA.AdjacentLines.Add(line);
         Dot dotB = _dots[x, y + 1];
+        dotB.AdjacentLines.Add(line);
         line.Initialize(dotA, dotB);
 
         _verticalLines[x, y] = line;
@@ -100,10 +140,14 @@ public class GridManager : MonoBehaviour
         rectTransform.anchoredPosition = linePos;
 
         Dot dotA = _dots[x, y];
+        dotA.AdjacentLines.Add(line);
         Dot dotB = _dots[x + 1, y];
+        dotB.AdjacentLines.Add(line);
         line.Initialize(dotA, dotB);
 
         _horizontalLines[x, y] = line;
     }
+
+    
 
 }
