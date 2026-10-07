@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerTurnManager : MonoBehaviour
 {
-    PlayerBaseTurn currentTurn;
-    FirstPlayerTurn firstPlayer = new FirstPlayerTurn();
-    SecondPlayerTurn secondPlayer = new SecondPlayerTurn();
+    public PlayerBaseTurn currentTurn;
+    public FirstPlayerTurn firstPlayer = new FirstPlayerTurn();
+    public SecondPlayerTurn secondPlayer = new SecondPlayerTurn();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentTurn = firstPlayer;
-        currentTurn.EnterState(this);
+        currentTurn.EnterTurn(this);
     }
 
     // Update is called once per frame
@@ -17,7 +17,7 @@ public class PlayerTurnManager : MonoBehaviour
     {
         currentTurn.ChangeState(this);
     }
-    void SwitchTurn(PlayerBaseTurn turn)
+    public void SwitchTurn(PlayerBaseTurn turn)
     {
         currentTurn = turn;
         currentTurn.ChangeState(this);
