@@ -8,18 +8,18 @@ public class PlayerTurnManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentTurn = firstPlayer;
+        currentTurn = secondPlayer;
         currentTurn.EnterTurn(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTurn.ChangeState(this);
+        currentTurn.UpdateState(this);
     }
     public void SwitchTurn(PlayerBaseTurn turn)
     {
         currentTurn = turn;
-        currentTurn.ChangeState(this);
+        currentTurn.SwapTurn(this);
     }
 }
