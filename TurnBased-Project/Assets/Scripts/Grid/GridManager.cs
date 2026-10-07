@@ -57,7 +57,7 @@ public class GridManager : MonoBehaviour
         {
             targetLine.Draw();
             int drawnSquares = TryToDrawAdjacentSquares(targetLine);
-            OnLineDrawn.Invoke(drawnSquares);
+            OnLineDrawn?.Invoke(drawnSquares);
         }
     }
 

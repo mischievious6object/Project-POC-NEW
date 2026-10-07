@@ -26,11 +26,11 @@ public class InputManager : MonoBehaviour
 
     public void OnDotPressed(Dot dot)
     {
-        if (_selectedDot == null)
-        {
-            _selectedDot = dot;
-            _gameManager.HighlightManager.HighlightAvailableNeighbors(dot);
-        }
+        _selectedDot = null;
+        _gameManager.HighlightManager.ClearHighlights();
+
+        _selectedDot = dot;
+        _gameManager.HighlightManager.HighlightAvailableNeighbors(dot);
     }
 
 
