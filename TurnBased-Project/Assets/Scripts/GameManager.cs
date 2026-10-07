@@ -5,6 +5,9 @@ public class GameManager : MonoBehaviour
     public GridManager GridManager;
     public HighlightManager HighlightManager;
     public InputManager InputHandler;
+
+    public Color CurrentPlayerColor;
+
     private void Awake()
     {
         GridManager = FindFirstObjectByType<GridManager>();

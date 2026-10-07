@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+
 public class InputManager : MonoBehaviour
 {
-    private GameManager _gameManager;
 
     private Dot _selectedDot;
+
+    private GameManager _gameManager;
 
     private void Awake()
     {

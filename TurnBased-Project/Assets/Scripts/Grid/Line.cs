@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Line : MonoBehaviour
 {
     public bool IsDrawn = false;
     public Dot DotA;
     public Dot DotB;
+    public List<Square> AdjacentSquares = new();
 
     public Dot GetOtherDot(Dot current) => current == DotA ? DotB : DotA;
 
