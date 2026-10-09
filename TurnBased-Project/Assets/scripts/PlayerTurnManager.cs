@@ -1,25 +1,34 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerTurnManager : MonoBehaviour
 {
-    public PlayerBaseTurn currentTurn;
-    public FirstPlayerTurn firstPlayer = new FirstPlayerTurn();
-    public SecondPlayerTurn secondPlayer = new SecondPlayerTurn();
+
+    Player player1 = new Player();
+    Player player2 = new Player();
+    Player currentPlayer = new Player();
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentTurn = secondPlayer;
-        currentTurn.EnterTurn(this);
+        currentPlayer = player1;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTurn.UpdateState(this);
     }
-    public void SwitchTurn(PlayerBaseTurn turn)
+    public void LineIsDrawn(int pDrawnSquares)
     {
-        currentTurn = turn;
-        currentTurn.SwapTurn(this);
+        if (pDrawnSquares >= 0)
+        {
+            currentPlayer.score++;
+        }
+        else
+        {
+            currentPlayer = player2;
+        }
     }
 }
