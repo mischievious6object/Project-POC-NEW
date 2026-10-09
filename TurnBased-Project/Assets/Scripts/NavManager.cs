@@ -12,7 +12,7 @@ public class NavManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        Application.Quit(); 
     }
 
 }

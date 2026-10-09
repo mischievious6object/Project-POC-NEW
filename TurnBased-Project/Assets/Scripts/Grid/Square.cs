@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Square : MonoBehaviour
 {
-    public bool IsDrawn = false;
-    public List<Line> Borders = new();
+    public bool IsDrawn { get; private set; }
+    public List<Line> Borders { get; private set; } = new();
 
     public bool IsCompleted => !IsDrawn && Borders.All(b => b.IsDrawn);
 

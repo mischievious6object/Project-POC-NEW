@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GridManager GridManager;
-    public HighlightManager HighlightManager;
-    public InputManager InputHandler;
-    public TurnManager TurnManager;
-    public ScoreManager ScoreManager;
+    public GridManager GridManager { get; private set; }
+    public HighlightManager HighlightManager { get; private set; }
+    public InputManager InputHandler { get; private set; }
+    public TurnManager TurnManager { get; private set; }
+    public ScoreManager ScoreManager { get; private set; }
 
     public Player FirstPlayer;
     public Player SecondPlayer;
+
+    [SerializeField] private Player _firstPlayer;
+    [SerializeField] private Player _secondPlayer;
 
     [SerializeField] private Color _firstPlayerColor;
     [SerializeField] private Color _secondPlayerColor;
@@ -35,11 +38,11 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-        FirstPlayer.Initialize("Player A", _firstPlayerColor);
-        SecondPlayer.Initialize("Player B", _secondPlayerColor);
+        _firstPlayer.Initialize("Player A", _firstPlayerColor);
+        _secondPlayer.Initialize("Player B", _secondPlayerColor);
 
         GridManager.CreateGrid();
-        TurnManager.StartTurn(FirstPlayer);
+        TurnManager.StartTurn(_firstPlayer);
     }
 
     private void OnLineDrawn(int drawnSquares)
@@ -60,7 +63,7 @@ public class GameManager : MonoBehaviour
         bool hasEmptySquares = GridManager.HasUndrawnSquares();
         if (hasEmptySquares) return;
 
-        Player winner = ScoreManager.GetWinner(FirstPlayer, SecondPlayer);
+        Player winner = ScoreManager.GetWinner(_firstPlayer, _secondPlayer);
         _endGamePopup.Show(winner);
     }
 

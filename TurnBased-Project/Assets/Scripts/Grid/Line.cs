@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class Line : MonoBehaviour
 {
-    public bool IsDrawn = false;
-    public Dot DotA;
-    public Dot DotB;
-    public List<Square> AdjacentSquares = new();
+    public bool IsDrawn { get; private set; }
+    public Dot DotA { get; private set; }
+    public Dot DotB { get; private set; }
+    public List<Square> AdjacentSquares { get; private set; } = new();
 
     public Dot GetOtherDot(Dot current) => current == DotA ? DotB : DotA;
 
