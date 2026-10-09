@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public class GridManager : MonoBehaviour
@@ -56,6 +57,20 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void CreateGrid()
+    {
+        CreateDots();
+        CreateLines();
+        CreateSquares();
+    }
+
+    public bool HasUndrawnSquares()
+    {
+        return _squares.Cast<Square>()
+            .Any(s => !s.IsDrawn);
+    }
+
+
     private int TryToDrawAdjacentSquares(Line line)
     {
         int drawnSquares = 0;
@@ -70,14 +85,6 @@ public class GridManager : MonoBehaviour
         }
         
         return drawnSquares;
-    }
-
-
-    public void CreateGrid()
-    {
-        CreateDots();
-        CreateLines();
-        CreateSquares();
     }
 
     private void CreateDots()

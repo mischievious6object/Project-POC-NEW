@@ -11,4 +11,18 @@ public class ScoreManager : MonoBehaviour
         player.SetScore(score);
     }
 
+    public Player GetWinner(Player firstPlayer, Player secondPlayer)
+    {
+        if (firstPlayer.Score > secondPlayer.Score)
+        {
+            return firstPlayer;
+        }
+        else if (firstPlayer.Score < secondPlayer.Score)
+        {
+            return secondPlayer;
+        }
+
+        return null;
+    }
+
 }

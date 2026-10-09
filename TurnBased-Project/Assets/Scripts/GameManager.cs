@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color _firstPlayerColor;
     [SerializeField] private Color _secondPlayerColor;
 
+    [SerializeField] private EndGamePopup _endGamePopup;
+
     private void Awake()
     {
         GridManager = FindFirstObjectByType<GridManager>();
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
         InputHandler = FindFirstObjectByType<InputManager>();
         TurnManager = FindFirstObjectByType<TurnManager>();
         ScoreManager = FindFirstObjectByType<ScoreManager>();
+
 
         GridManager.OnLineDrawn += OnLineDrawn;
     }
@@ -48,6 +51,18 @@ public class GameManager : MonoBehaviour
         else
         {
             ScoreManager.AddScoreToPlayer(TurnManager.CurrentPlayer, drawnSquares);
+            CheckGameOver();
         }
     }
+
+    private void CheckGameOver()
+    {
+        bool hasEmptySquares = GridManager.HasUndrawnSquares();
+        if (hasEmptySquares) return;
+
+        Player winner = ScoreManager.GetWinner(FirstPlayer, SecondPlayer);
+        _endGamePopup.Show(winner);
+    }
+
+
 }
