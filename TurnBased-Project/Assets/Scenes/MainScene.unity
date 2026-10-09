@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1913,6 +1913,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 6557073204732820485, guid: 1ca1c73755548474fbcd4325097e3e50, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8837207285754969683, guid: 1ca1c73755548474fbcd4325097e3e50, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -145
@@ -2033,7 +2037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9018417511156773674, guid: 25600047477f4a241aaa522d68104760, type: 3}
       propertyPath: _length
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9018417511156773674, guid: 25600047477f4a241aaa522d68104760, type: 3}
       propertyPath: _dotsContainer
