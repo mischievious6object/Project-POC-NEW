@@ -23,10 +23,7 @@ public class SecondPlayerTurn : PlayerBaseTurn
         }
 
     }
-    public override void ExtraTurn(PlayerTurnManager turn)
-    {
 
-    }
 
 
 }
