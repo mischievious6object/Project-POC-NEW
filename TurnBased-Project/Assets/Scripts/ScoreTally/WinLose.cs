@@ -17,8 +17,8 @@ public class WinLose : MonoBehaviour
     void Start()
     {
         //fetch the scores
-        player1score = ScoreManager.Instance.FetchPlayer1Score();
-        player2score = ScoreManager.Instance.FetchPlayer2Score(); 
+        //player1score = ScoreManager.Instance.FetchPlayer1Score();
+        //player2score = ScoreManager.Instance.FetchPlayer2Score(); 
 
         //calculate who wins
         if (player1score > player2score) { resultState = 1; }

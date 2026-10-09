@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5782572839104352791
+--- !u!1 &2838288209731980358
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9160481167154222211}
-  - component: {fileID: 9036904281488760448}
+  - component: {fileID: 3801297418307674351}
+  - component: {fileID: 2670564294350592968}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: TurnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9160481167154222211
+--- !u!4 &3801297418307674351
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5782572839104352791}
+  m_GameObject: {fileID: 2838288209731980358}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -221.34532, y: -59.39056, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9036904281488760448
+--- !u!114 &2670564294350592968
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5782572839104352791}
+  m_GameObject: {fileID: 2838288209731980358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6f2948fe0e214347b403fb7df8e0a91, type: 3}
+  m_Script: {fileID: 11500000, guid: c72fd16e3eedf7a4380dbb1c16ecd20d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  GridManager: {fileID: 0}
-  HighlightManager: {fileID: 0}
-  InputHandler: {fileID: 0}
-  TurnManager: {fileID: 0}
-  FirstPlayer: {fileID: 0}
-  SecondPlayer: {fileID: 0}
-  _firstPlayerColor: {r: 0.3882353, g: 0.60784316, b: 0.99607843, a: 1}
-  _secondPlayerColor: {r: 0.8509804, g: 0.34117648, b: 0.3882353, a: 1}
+  m_EditorClassIdentifier: Assembly-CSharp::TurnManager

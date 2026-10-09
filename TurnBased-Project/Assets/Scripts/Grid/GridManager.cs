@@ -29,11 +29,6 @@ public class GridManager : MonoBehaviour
         _gameManager = FindFirstObjectByType<GameManager>();
     }
 
-    private void Start()
-    {
-        CreateGrid();
-    }
-
     public void TryToDrawLine(Dot dotA, Dot dotB)
     {
         int deltaX = Mathf.Abs(dotA.XPos - dotB.XPos);
@@ -69,7 +64,7 @@ public class GridManager : MonoBehaviour
         {
             if (adjacentSquare.IsCompleted)
             {
-                adjacentSquare.Draw(_gameManager.CurrentPlayerColor);
+                adjacentSquare.Draw(_gameManager.TurnManager.CurrentPlayer.Color);
                 drawnSquares++;
             }
         }
