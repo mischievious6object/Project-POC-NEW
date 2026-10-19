@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 
 public class Dot : MonoBehaviour, IPointerDownHandler
 {
-    public int XPos;
-    public int YPos;
-    public List<Line> AdjacentLines = new();
+    public int XPos { get; private set; }
+    public int YPos { get; private set; }
+    public List<Line> AdjacentLines { get; private set; } = new();
 
     [SerializeField] private GameObject _highlight;
 

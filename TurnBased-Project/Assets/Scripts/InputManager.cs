@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+
 public class InputManager : MonoBehaviour
 {
-    private GameManager _gameManager;
 
     private Dot _selectedDot;
+
+    private GameManager _gameManager;
 
     private void Awake()
     {
@@ -24,11 +26,11 @@ public class InputManager : MonoBehaviour
 
     public void OnDotPressed(Dot dot)
     {
-        if (_selectedDot == null)
-        {
-            _selectedDot = dot;
-            _gameManager.HighlightManager.HighlightAvailableNeighbors(dot);
-        }
+        _selectedDot = null;
+        _gameManager.HighlightManager.ClearHighlights();
+
+        _selectedDot = dot;
+        _gameManager.HighlightManager.HighlightAvailableNeighbors(dot);
     }
 
 
