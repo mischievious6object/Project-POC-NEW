@@ -97,9 +97,9 @@
                     "priority": 0
                 },
                 {
-                    "name": "GravGrab",
+                    "name": "GravPull",
                     "type": "Button",
-                    "id": "ae3a3391-f7ca-4ccf-877f-6d9864ef1385",
+                    "id": "4f9f24f2-5b94-4e70-9661-e25db2fdbdf2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -109,7 +109,7 @@
                 {
                     "name": "GravPush",
                     "type": "Button",
-                    "id": "2991684d-27e3-4fc6-9dc1-4277869b9eac",
+                    "id": "1c1bbc37-d93f-44f9-979a-29bd7c615214",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -505,22 +505,44 @@
                 },
                 {
                     "name": "",
-                    "id": "ed9fb0ab-f47b-4845-af77-306d301b312f",
+                    "id": "198ef79b-33e9-4fdd-bc45-3fbec7b903a4",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "GravGrab",
+                    "groups": "",
+                    "action": "GravPull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "abfefc3f-6b8d-442a-b529-2aa888d4e920",
+                    "id": "192d948d-72f9-4da0-8663-3a2aeb45f47b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GravPull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65cd09b7-acc2-47eb-a723-45633c076c27",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
+                    "action": "GravPush",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1ef92c8-21f1-43e1-8be8-ceacb9d85841",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "GravPush",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1048,6 +1070,78 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Gravity Gun",
+            "id": "09e60259-8d78-4513-b7e4-673808412f59",
+            "actions": [
+                {
+                    "name": "Pull",
+                    "type": "Button",
+                    "id": "9897d5e8-a3e4-4964-ad59-6f08087776cb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Push",
+                    "type": "Button",
+                    "id": "16d6e09f-a2a3-42c1-b8d9-585bc9774445",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "59081bea-000d-455c-9efd-0534f66b5081",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc565de6-a9c2-414f-a780-d9aae929598b",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Pull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f09d6a2-18e6-42fb-b4e2-4cc8629cd4d9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d947ed12-fdde-448c-a4f7-7815bbb21717",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Push",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
