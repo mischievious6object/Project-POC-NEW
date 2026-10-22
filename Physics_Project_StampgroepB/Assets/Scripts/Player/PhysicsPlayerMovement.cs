@@ -8,6 +8,7 @@ public class PhysicsPlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private GravityGunV2 gravityGun;
 
     [Header("Movement")]
     [SerializeField] private float groundAcceleration = 32f;
@@ -77,23 +78,36 @@ public class PhysicsPlayerMovement : MonoBehaviour
         capsule = GetComponent<CapsuleCollider>();
         playerInput = GetComponent<PlayerInput>();
 
-        // Get actions from the Player action map.
-        moveAction = playerInput.actions["Move"];
-        lookAction = playerInput.actions["Look"];
-        jumpAction = playerInput.actions["Jump"];
-        crouchAction = playerInput.actions["Crouch"];
+        moveAction =
+            playerInput.actions["Move"];
+
+        lookAction =
+            playerInput.actions["Look"];
+
+        jumpAction =
+            playerInput.actions["Jump"];
+
+        crouchAction =
+            playerInput.actions["Crouch"];
 
         rb.freezeRotation = true;
         rb.useGravity = true;
 
-        originalColliderCenter = capsule.center;
+        originalColliderCenter =
+            capsule.center;
 
-        currentHeight = standingHeight;
-        currentCameraHeight = standingCameraHeight;
+        currentHeight =
+            standingHeight;
 
-        capsule.height = standingHeight;
+        currentCameraHeight =
+            standingCameraHeight;
 
-        Cursor.lockState = CursorLockMode.Locked;
+        capsule.height =
+            standingHeight;
+
+        Cursor.lockState =
+            CursorLockMode.Locked;
+
         Cursor.visible = false;
     }
 
@@ -106,24 +120,36 @@ public class PhysicsPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        groundCheckTimer -= Time.fixedDeltaTime;
-        grounded = groundCheckTimer > 0f;
+        groundCheckTimer -=
+            Time.fixedDeltaTime;
+
+        grounded =
+            groundCheckTimer > 0f;
 
         HandleCrouch();
         HandleMovement();
         HandleJump();
         HandleExtraGravity();
 
-        rb.linearDamping = grounded ? groundDrag : airDrag;
+        rb.linearDamping =
+            grounded
+                ? groundDrag
+                : airDrag;
     }
 
     private void ReadInput()
     {
-        moveInput = moveAction.ReadValue<Vector2>();
-        lookInput = lookAction.ReadValue<Vector2>();
+        moveInput =
+            moveAction.ReadValue<Vector2>();
 
-        jumpHeld = jumpAction.IsPressed();
-        crouchHeld = crouchAction.IsPressed();
+        lookInput =
+            lookAction.ReadValue<Vector2>();
+
+        jumpHeld =
+            jumpAction.IsPressed();
+
+        crouchHeld =
+            crouchAction.IsPressed();
     }
 
     private void HandleLook()
@@ -131,38 +157,54 @@ public class PhysicsPlayerMovement : MonoBehaviour
         if (cameraTransform == null)
             return;
 
-        if (Cursor.lockState != CursorLockMode.Locked)
+        if (Cursor.lockState !=
+            CursorLockMode.Locked)
             return;
 
-        Vector2 look = lookInput;
-
         /*
-         * Mouse gives us pixel delta.
-         * Controller stick gives us a normalized value.
+         * IMPORTANT:
          *
-         * Handle them slightly differently so controller look
-         * isn't frame-rate dependent.
+         * If R is being held while carrying an object,
+         * the gravity gun owns the Look input.
+         *
+         * Player/camera rotation completely stops.
          */
-        if (playerInput.currentControlScheme == "Gamepad")
+        if (gravityGun != null &&
+            gravityGun.IsRotatingHeldObject)
         {
-            look *= controllerLookSensitivity * Time.deltaTime;
+            return;
+        }
+
+        Vector2 look =
+            lookInput;
+
+        if (playerInput.currentControlScheme ==
+            "Gamepad")
+        {
+            look *=
+                controllerLookSensitivity *
+                Time.deltaTime;
         }
         else
         {
-            look *= mouseSensitivity;
+            look *=
+                mouseSensitivity;
         }
 
         transform.Rotate(
-            Vector3.up * look.x
+            Vector3.up *
+            look.x
         );
 
-        cameraPitch -= look.y;
+        cameraPitch -=
+            look.y;
 
-        cameraPitch = Mathf.Clamp(
-            cameraPitch,
-            -maxLookAngle,
-            maxLookAngle
-        );
+        cameraPitch =
+            Mathf.Clamp(
+                cameraPitch,
+                -maxLookAngle,
+                maxLookAngle
+            );
 
         cameraTransform.localRotation =
             Quaternion.Euler(
@@ -175,11 +217,15 @@ public class PhysicsPlayerMovement : MonoBehaviour
     private void HandleMovement()
     {
         Vector3 direction =
-            transform.forward * moveInput.y +
-            transform.right * moveInput.x;
+            transform.forward *
+            moveInput.y +
+            transform.right *
+            moveInput.x;
 
         if (direction.sqrMagnitude > 1f)
+        {
             direction.Normalize();
+        }
 
         if (grounded)
         {
@@ -191,10 +237,14 @@ public class PhysicsPlayerMovement : MonoBehaviour
         }
     }
 
-    private void GroundMovement(Vector3 direction)
+    private void GroundMovement(
+        Vector3 direction)
     {
-        if (direction.sqrMagnitude < 0.01f)
+        if (direction.sqrMagnitude <
+            0.01f)
+        {
             return;
+        }
 
         float maxSpeed =
             crouchHeld
@@ -210,19 +260,25 @@ public class PhysicsPlayerMovement : MonoBehaviour
                 direction
             );
 
-        if (speedInDirection < maxSpeed)
+        if (speedInDirection <
+            maxSpeed)
         {
             rb.AddForce(
-                direction * groundAcceleration,
+                direction *
+                groundAcceleration,
                 ForceMode.Acceleration
             );
         }
     }
 
-    private void AirMovement(Vector3 direction)
+    private void AirMovement(
+        Vector3 direction)
     {
-        if (direction.sqrMagnitude < 0.01f)
+        if (direction.sqrMagnitude <
+            0.01f)
+        {
             return;
+        }
 
         Vector3 horizontalVelocity =
             GetHorizontalVelocity();
@@ -233,10 +289,12 @@ public class PhysicsPlayerMovement : MonoBehaviour
                 direction
             );
 
-        if (speedInDirection < bunnyHopMaxSpeed)
+        if (speedInDirection <
+            bunnyHopMaxSpeed)
         {
             rb.AddForce(
-                direction * airAcceleration,
+                direction *
+                airAcceleration,
                 ForceMode.Acceleration
             );
         }
@@ -244,20 +302,20 @@ public class PhysicsPlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
-        if (!jumpHeld)
+        if (!jumpHeld ||
+            !grounded ||
+            crouchHeld)
+        {
             return;
-
-        if (!grounded)
-            return;
-
-        if (crouchHeld)
-            return;
+        }
 
         Vector3 velocity =
             rb.linearVelocity;
 
         if (velocity.y < 0f)
+        {
             velocity.y = 0f;
+        }
 
         Vector3 horizontalVelocity =
             new Vector3(
@@ -269,11 +327,8 @@ public class PhysicsPlayerMovement : MonoBehaviour
         float horizontalSpeed =
             horizontalVelocity.magnitude;
 
-        /*
-         * Successful chained bunny hops
-         * gradually increase speed.
-         */
-        if (horizontalSpeed >= bunnyHopMinimumSpeed)
+        if (horizontalSpeed >=
+            bunnyHopMinimumSpeed)
         {
             Vector3 boostDirection =
                 horizontalVelocity.normalized;
@@ -296,10 +351,12 @@ public class PhysicsPlayerMovement : MonoBehaviour
             }
         }
 
-        rb.linearVelocity = velocity;
+        rb.linearVelocity =
+            velocity;
 
         rb.AddForce(
-            Vector3.up * jumpVelocity,
+            Vector3.up *
+            jumpVelocity,
             ForceMode.VelocityChange
         );
 
@@ -312,18 +369,10 @@ public class PhysicsPlayerMovement : MonoBehaviour
         if (grounded)
             return;
 
-        float multiplier;
-
-        if (rb.linearVelocity.y < 0f)
-        {
-            multiplier =
-                fallGravityMultiplier;
-        }
-        else
-        {
-            multiplier =
-                gravityMultiplier;
-        }
+        float multiplier =
+            rb.linearVelocity.y < 0f
+                ? fallGravityMultiplier
+                : gravityMultiplier;
 
         rb.AddForce(
             Physics.gravity *
@@ -344,11 +393,13 @@ public class PhysicsPlayerMovement : MonoBehaviour
                 ? crouchingCameraHeight
                 : standingCameraHeight;
 
-        currentHeight = Mathf.MoveTowards(
-            currentHeight,
-            targetHeight,
-            crouchSpeed * Time.fixedDeltaTime
-        );
+        currentHeight =
+            Mathf.MoveTowards(
+                currentHeight,
+                targetHeight,
+                crouchSpeed *
+                Time.fixedDeltaTime
+            );
 
         currentCameraHeight =
             Mathf.MoveTowards(
@@ -371,11 +422,7 @@ public class PhysicsPlayerMovement : MonoBehaviour
         {
             if (grounded)
             {
-                /*
-                 * Grounded:
-                 * feet stay planted.
-                 * Top of body comes down.
-                 */
+                // Feet stay planted.
                 targetCenter =
                     originalColliderCenter +
                     Vector3.down *
@@ -383,14 +430,7 @@ public class PhysicsPlayerMovement : MonoBehaviour
             }
             else
             {
-                /*
-                 * Airborne:
-                 * top stays roughly where it was.
-                 * Legs pull upward.
-                 *
-                 * This allows crouch-jumping
-                 * onto taller ledges.
-                 */
+                // Legs tuck upward while airborne.
                 targetCenter =
                     originalColliderCenter +
                     Vector3.up *
@@ -437,7 +477,8 @@ public class PhysicsPlayerMovement : MonoBehaviour
     private void HandleCursor()
     {
         if (Keyboard.current != null &&
-            Keyboard.current.escapeKey.wasPressedThisFrame)
+            Keyboard.current.escapeKey
+                .wasPressedThisFrame)
         {
             Cursor.lockState =
                 CursorLockMode.None;
@@ -446,7 +487,8 @@ public class PhysicsPlayerMovement : MonoBehaviour
         }
 
         if (Mouse.current != null &&
-            Mouse.current.leftButton.wasPressedThisFrame)
+            Mouse.current.leftButton
+                .wasPressedThisFrame)
         {
             Cursor.lockState =
                 CursorLockMode.Locked;
@@ -455,17 +497,15 @@ public class PhysicsPlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(
+        Collision collision)
     {
         foreach (
             ContactPoint contact
-            in collision.contacts
-        )
+            in collision.contacts)
         {
-            if (
-                contact.normal.y >=
-                minimumGroundNormal
-            )
+            if (contact.normal.y >=
+                minimumGroundNormal)
             {
                 groundCheckTimer =
                     groundGraceTime;

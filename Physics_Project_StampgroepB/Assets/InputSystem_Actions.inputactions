@@ -1098,6 +1098,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "RotateHeldObject",
+                    "type": "Button",
+                    "id": "b7914495-49b5-48fa-b9fc-599b85737d3b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -1142,6 +1152,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db3de35a-0b1d-43a1-a8a9-671c3fcfe005",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "RotateHeldObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f6a4a17-5d84-4184-b243-560eb843241f",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "RotateHeldObject",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
