@@ -1,37 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrabHintUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _hint;
-    private GravityGunV2 _gravityGun;
 
-    private void Awake()
+    [SerializeField] private Image _crosshair;
+
+    [SerializeField] private Color _defaultCrosshairColor;
+    [SerializeField] private Color _hintCrosshairColor;
+
+    public void Show()
     {
-        _gravityGun = FindFirstObjectByType<GravityGunV2>();
-        _gravityGun.OnObjectGrabbed += Show;
-        _gravityGun.OnObjectDropped += Hide;
+        _crosshair.color = _hintCrosshairColor;
+        gameObject.SetActive(true);
     }
 
-    private void OnEnable()
+    public void Hide()
     {
-        _gravityGun.OnObjectGrabbed += Show;
-        _gravityGun.OnObjectDropped += Hide;
-    }
-
-    private void OnDisable()
-    {
-        _gravityGun.OnObjectGrabbed -= Show;
-        _gravityGun.OnObjectDropped -= Hide;
-    }
-
-    private void Show()
-    {
-        _hint.SetActive(true);
-    }
-
-    private void Hide()
-    {
-        _hint.SetActive(false);
+        if (gameObject.activeSelf)
+        {
+            _crosshair.color = _defaultCrosshairColor;
+            gameObject.SetActive(false);
+        }
     }
 
 }

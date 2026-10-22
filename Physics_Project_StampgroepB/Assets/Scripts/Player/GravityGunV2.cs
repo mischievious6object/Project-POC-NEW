@@ -45,6 +45,9 @@ public class GravityGunV2 : MonoBehaviour
     public event Action OnObjectGrabbed;
     public event Action OnObjectDropped;
 
+    public bool IsGrabing => grabbedRB != null;
+    public float MaxGrabDistance => maxGrabDistance;
+
     private Rigidbody grabbedRB;
 
     private float grabbedOriginalLinearDamping;
