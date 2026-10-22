@@ -25,7 +25,7 @@ public class HintsController : MonoBehaviour
 
     private void Update()
     {
-        if (_gravityGun.IsGrabing)
+        if (_gravityGun.IsHoldingObject)
         {
             _grabHint.Hide();
         }

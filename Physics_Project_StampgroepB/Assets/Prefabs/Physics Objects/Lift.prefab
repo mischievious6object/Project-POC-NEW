@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1554578105915930342}
   m_Layer: 0
   m_Name: Lift
-  m_TagString: Untagged
+  m_TagString: PhysicsObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
