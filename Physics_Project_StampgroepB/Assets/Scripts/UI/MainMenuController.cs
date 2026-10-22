@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+
+    [SerializeField] private SettingController _settingController;
+
     public void Play()
     {
         //SceneManager.LoadScene("LastLevel");
@@ -15,7 +18,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Settings()
     {
-        //SceneManager.LoadScene("Settings");
+        _settingController.ShowSettings();
     }
 
     public void Quit()

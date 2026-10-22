@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 125, y: -125}
-  m_SizeDelta: {x: 200, y: 40}
+  m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &452477053001230983
 CanvasRenderer:
@@ -135,10 +135,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonHover
   _background: {fileID: 2228660263912547795}
-  _text: {fileID: 212751169440237698}
   _defaultBackgroundColor: {r: 0.11764706, g: 0.12156863, b: 0.13333334, a: 1}
-  _defaultTextColor: {r: 0.7607843, g: 0.77254903, b: 0.8, a: 1}
   _hoverBackgroundColor: {r: 0.23921569, g: 0.15294118, b: 0.07058824, a: 1}
+  _text: {fileID: 212751169440237698}
+  _defaultText: Button
+  _defaultTextColor: {r: 0.7607843, g: 0.77254903, b: 0.8, a: 1}
   _hoverTextColor: {r: 1, g: 0.6, b: 0, a: 1}
 --- !u!1 &4345169850883254388
 GameObject:
@@ -205,7 +206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ButtonText
+  m_text: '  Button'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 53b22655784f22046a5dbdf7cddbe66f, type: 2}
   m_sharedMaterial: {fileID: 1204448408614712058, guid: 53b22655784f22046a5dbdf7cddbe66f, type: 2}
@@ -232,8 +233,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

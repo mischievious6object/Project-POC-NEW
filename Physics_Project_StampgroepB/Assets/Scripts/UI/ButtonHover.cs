@@ -19,9 +19,7 @@ public class UIButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Start()
     {
-        _background.color = _defaultBackgroundColor;
-        _text.color = _defaultTextColor;
-        SetDefaultText();
+        ResetButton();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -32,6 +30,16 @@ public class UIButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        ResetButton();
+    }
+
+    private void OnEnable()
+    {
+        ResetButton();
+    }
+
+    private void ResetButton()
     {
         _background.color = _defaultBackgroundColor;
         _text.color = _defaultTextColor;
