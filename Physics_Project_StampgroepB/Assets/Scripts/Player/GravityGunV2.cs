@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,9 @@ public class GravityGunV2 : MonoBehaviour
     [Header("Input Actions")]
     [SerializeField] private InputActionReference gravPull;
     [SerializeField] private InputActionReference gravPush;
+
+    public event Action OnObjectGrabbed;
+    public event Action OnObjectDropped;
 
     private Rigidbody grabbedRB;
 
@@ -215,6 +219,8 @@ public class GravityGunV2 : MonoBehaviour
         {
             StabilizeObjectRotation(massFactor);
         }
+
+        OnObjectGrabbed?.Invoke();
     }
 
     private Vector3 GetTargetPosition()
@@ -330,5 +336,6 @@ public class GravityGunV2 : MonoBehaviour
             grabbedOriginalAngularDamping;
 
         grabbedRB = null;
+        OnObjectDropped?.Invoke();
     }
 }
