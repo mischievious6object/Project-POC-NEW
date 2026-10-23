@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -56,6 +57,7 @@ public class PhysicsPlayerMovement : MonoBehaviour
     private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction crouchAction;
+    private InputAction restartAction;
 
     private Vector2 moveInput;
     private Vector2 lookInput;
@@ -90,6 +92,9 @@ public class PhysicsPlayerMovement : MonoBehaviour
         crouchAction =
             playerInput.actions["Crouch"];
 
+        restartAction = 
+            playerInput.actions["Restart"];
+
         rb.freezeRotation = true;
         rb.useGravity = true;
 
@@ -116,6 +121,7 @@ public class PhysicsPlayerMovement : MonoBehaviour
         ReadInput();
         HandleLook();
         HandleCursor();
+        HandleRestart();
     }
 
     private void FixedUpdate()
@@ -514,6 +520,15 @@ public class PhysicsPlayerMovement : MonoBehaviour
 
                 return;
             }
+        }
+    }
+
+    //handles restarting of scene
+    private void HandleRestart()
+    {
+        if (restartAction.WasPressedThisFrame())
+        {
+            SceneManager.LoadScene("MainLevel");
         }
     }
 }
