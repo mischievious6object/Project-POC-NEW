@@ -15,3 +15,4 @@ MonoBehaviour:
   _maxHealth: 1
   _score: 1
   _speed: 0
+  _prefab: {fileID: 8759820087340276218, guid: 9e005e0fe33b121469aad17aea5dd95f, type: 3}

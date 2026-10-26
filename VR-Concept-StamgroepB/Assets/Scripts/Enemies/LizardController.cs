@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LizardController : MonoBehaviour
 {
+    public LizardData Data => _data;
     public event Action<int> OnDeath;
 
     [SerializeField] private LizardData _data;
@@ -12,15 +13,19 @@ public class LizardController : MonoBehaviour
     private void Awake()
     {
         _health = GetComponent<Health>();
+    }
+
+    private void OnEnable()
+    {
         _health.OnDeath += Death;
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        Initialize();
+        _health.OnDeath -= Death;
     }
 
-    public void Initialize()
+    public void Initialize()    
     {
         _health.SetHealth(_data.MaxHealth);
     }
@@ -28,7 +33,6 @@ public class LizardController : MonoBehaviour
     private void Death()
     {
         _health.OnDeath -= Death;
-        Destroy(gameObject);
         OnDeath.Invoke(_data.Score);
     }
 
