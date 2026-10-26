@@ -1,0 +1,88 @@
+# ==========================================
+# Unity generated folders
+# ==========================================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Unity user-specific settings
+UserSettings/
+
+# ==========================================
+# IDE / Visual Studio / Rider
+# ==========================================
+
+.vs/
+.idea/
+
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Rider
+*.sln.iml
+
+# ==========================================
+# OS junk
+# ==========================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# Unity crash / debug files
+# ==========================================
+
+sysinfo.txt
+*.stackdump
+
+# ==========================================
+# Unity package / cache files
+# ==========================================
+
+.gradle/
+
+# ==========================================
+# Builds / executables
+# ==========================================
+
+*.apk
+*.aab
+*.unitypackage
+
+# ==========================================
+# VR / XR generated stuff
+# ==========================================
+
+# Android / Quest build output
+*.keystore
+
+# If Unity generates Gradle export folders
+ExportedObj/
+.gradle/
+
+# ==========================================
+# Misc
+# ==========================================
+
+*.tmp
+*.bak
+*.swp
+*.log
