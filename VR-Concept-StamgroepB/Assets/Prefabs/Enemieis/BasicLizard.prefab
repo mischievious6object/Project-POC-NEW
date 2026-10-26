@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7342047799708919734}
   - component: {fileID: 8759820087340276218}
   - component: {fileID: 9120729940881110269}
+  - component: {fileID: 514271318095524017}
   m_Layer: 0
   m_Name: BasicLizard
   m_TagString: Untagged
@@ -139,3 +140,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7263a4f9a154c414693b4dfb6c1f41db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
+--- !u!114 &514271318095524017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970050537673760716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a2a6335f04ee145b582075681c30cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LizardLinearMovement
+  _testWaypoints: []
