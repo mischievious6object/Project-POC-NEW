@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8759820087340276218}
   - component: {fileID: 9120729940881110269}
   - component: {fileID: 514271318095524017}
+  - component: {fileID: 6455346138899444833}
   m_Layer: 0
   m_Name: BasicLizard
   m_TagString: Untagged
@@ -152,4 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a2a6335f04ee145b582075681c30cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LizardLinearMovement
-  _testWaypoints: []
+--- !u!114 &6455346138899444833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970050537673760716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb25cfbe8e9eb446857b0b6788cb8f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LizardPeekingMovement

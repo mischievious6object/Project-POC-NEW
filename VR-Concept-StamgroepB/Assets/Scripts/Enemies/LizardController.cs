@@ -10,25 +10,29 @@ public class LizardController : MonoBehaviour
 
     [SerializeField] private LizardData _data;
 
-    private LizardLinearMovement _linearMovement;
     private Health _health;
+    private LizardLinearMovement _linearMovement;
+    private LizardPeekingMovement _peekingMovement;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
         _linearMovement = GetComponent<LizardLinearMovement>();
+        _peekingMovement = GetComponent<LizardPeekingMovement>();
     }
 
     private void OnEnable()
     {
         _health.OnDeath += NotifyDied;
         _linearMovement.OnDestinationReached += NotifyMovementFinished;
+        _peekingMovement.OnMovementFinished += NotifyMovementFinished;
     }
 
     private void OnDisable()
     {
         _health.OnDeath -= NotifyDied;
         _linearMovement.OnDestinationReached -= NotifyMovementFinished;
+        _peekingMovement.OnMovementFinished -= NotifyMovementFinished;
     }
 
     public void Initialize()    
@@ -36,7 +40,12 @@ public class LizardController : MonoBehaviour
         _health.SetHealth(_data.MaxHealth);
     }
 
-    private void NotifyDied() => OnDeath?.Invoke(_data.Score, this);
     private void NotifyMovementFinished() => OnMovementFinished?.Invoke(this);
+    private void NotifyDied()
+    {
+        _linearMovement.StopMoving();
+        _peekingMovement.StopPeeking();
+        OnDeath?.Invoke(_data.Score, this);
+    }
 
 }

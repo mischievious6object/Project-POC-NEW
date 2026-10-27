@@ -1,0 +1,72 @@
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class LizardPeekingMovement : MonoBehaviour
+{
+    public event Action OnMovementFinished;
+
+    private Coroutine _peekingCoroutine;
+    private LizardController _controller;
+
+    private void Awake()
+    {
+        _controller = GetComponent<LizardController>();
+    }
+
+    public void StartPeeking(List<Vector3> peekPositions)
+    {
+        _peekingCoroutine = StartCoroutine(PeekingRoutine(peekPositions));
+    }
+
+    public void StopPeeking()
+    {
+        StopCoroutine(_peekingCoroutine);
+    }
+
+    private IEnumerator PeekingRoutine(List<Vector3> peekPositions)
+    {
+        Vector3 startPosition = transform.position;
+        int peekTimes = UnityEngine.Random.Range(_controller.Data.MinPeeks, _controller.Data.MaxPeeks + 1);
+        while (peekTimes > 0)
+        {
+            Vector3 targetPosition = GetPositionToPeek(peekPositions);
+            yield return Wait();
+            yield return MoveToPosition(targetPosition);
+            yield return Wait();
+            yield return MoveToPosition(startPosition);
+
+            peekTimes--;
+        }
+
+        OnMovementFinished?.Invoke();
+    }
+
+    private IEnumerator MoveToPosition(Vector3 target)
+    {
+        while (Vector3.Distance(transform.position, target) > 0.05f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, _controller.Data.PeekingSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    private Vector3 GetPositionToPeek(List<Vector3> peekPositions)
+    {
+        int index = UnityEngine.Random.Range(0, peekPositions.Count);
+        return peekPositions[index];
+    }
+
+    private IEnumerator Wait()
+    {
+        float waitTime = UnityEngine.Random.Range(_controller.Data.MinWaitTime, _controller.Data.MaxWaitTime);
+        float timer = 0f;
+        while (timer < waitTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+}

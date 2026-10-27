@@ -1,6 +1,6 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class LizardLinearMovement : MonoBehaviour
 {
@@ -28,6 +28,12 @@ public class LizardLinearMovement : MonoBehaviour
         _waypoints = new(waypoints);
         _currentIndex = 0;
         _isMoving = true;
+    }
+
+    public void StopMoving()
+    {
+        if (!_isMoving) return;
+        _isMoving = false;
     }
 
     private void Move()
