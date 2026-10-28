@@ -9,8 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312105688993290935}
+  - component: {fileID: 8710229102560309116}
+  - component: {fileID: 6118209509549269981}
+  - component: {fileID: 6998499353938965189}
   m_Layer: 0
-  m_Name: SecondaryGrabPoint
+  m_Name: PumpHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,12 +28,132 @@ Transform:
   m_GameObject: {fileID: 140975886410421611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0346, z: 0.1039}
+  m_LocalPosition: {x: 0, y: -0.03, z: 0.1039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3458285513965635401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8710229102560309116
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140975886410421611}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.027038898, y: 0.031929992, z: 0.119716175}
+  m_Center: {x: 0.0010738015, y: 0.005536196, z: 0.008304485}
+--- !u!114 &6118209509549269981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140975886410421611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactables.XRSimpleInteractable
+  m_InteractionManager: {fileID: 0}
+  m_Colliders: []
+  m_InteractionLayers:
+    m_Bits: 1
+  m_DistanceCalculationMode: 1
+  m_SelectMode: 0
+  m_FocusMode: 1
+  m_CustomReticle: {fileID: 0}
+  m_AllowGazeInteraction: 0
+  m_AllowGazeSelect: 0
+  m_OverrideGazeTimeToSelect: 0
+  m_GazeTimeToSelect: 0.5
+  m_OverrideTimeToAutoDeselectGaze: 0
+  m_TimeToAutoDeselectGaze: 3
+  m_AllowGazeAssistance: 0
+  m_FirstHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstFocusEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastFocusExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FocusEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FocusExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Activated:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Deactivated:
+    m_PersistentCalls:
+      m_Calls: []
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+  m_StartingInteractionStrengthFilters: []
+  m_AutoFindParentInteractableInHierarchy: 0
+  m_ParentInteractableObject: {fileID: 0}
+--- !u!114 &6998499353938965189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140975886410421611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b452feb2cf56d4dafda2e1bca55d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PumpAction
+  shotgun: {fileID: 1457688358186208501}
+  shotgunGrab: {fileID: 8738670150049159453}
+  weaponRoot: {fileID: 3458285513965635401}
+  primaryGripPoint: {fileID: 5263092041064966819}
+  pumpGripPoint: {fileID: 312105688993290935}
+  pumpVisual: {fileID: 1717125700075589393}
+  localSlideAxis: {x: 0, y: 0, z: -0.01}
+  travelDistance: 0.01
+  rearThreshold: 0.85
+  forwardThreshold: 0.15
+  enableTwoHandAim: 1
+  audioSource: {fileID: 264824257434736518}
+  rackSound: {fileID: 8300000, guid: 0326597434469f74797df856c11edbb4, type: 3}
 --- !u!1 &529705453545688211
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +230,6 @@ GameObject:
   - component: {fileID: 8738670150049159453}
   - component: {fileID: 2600334668805058495}
   - component: {fileID: 8151771521099588490}
-  - component: {fileID: 4052793636821636408}
   - component: {fileID: 8694486143881342137}
   - component: {fileID: 6178325092126265397}
   - component: {fileID: 6314223076621083014}
@@ -254,7 +376,7 @@ MonoBehaviour:
   m_AutoFindParentInteractableInHierarchy: 0
   m_ParentInteractableObject: {fileID: 0}
   m_AttachTransform: {fileID: 5263092041064966819}
-  m_SecondaryAttachTransform: {fileID: 312105688993290935}
+  m_SecondaryAttachTransform: {fileID: 0}
   m_UseDynamicAttach: 0
   m_MatchAttachPosition: 1
   m_MatchAttachRotation: 1
@@ -351,27 +473,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.024917183, y: 0.02344468, z: 0.03470328}
   m_Center: {x: 0.000105414496, y: -0.044920333, z: -0.12919876}
---- !u!65 &4052793636821636408
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3186495700466884300}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.031006297, y: 0.029098827, z: 0.11951619}
-  m_Center: {x: 0.00054034946, y: -0.026000606, z: 0.1106685}
 --- !u!135 &8694486143881342137
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -453,12 +554,13 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 00b731034b174914fa9b32d91ced2328, type: 3}
   pelletsPerShot: 8
   pelletSpeed: 30
-  spreadAngle: 6
+  spreadAngle: 2
   fireCooldown: 0.5
+  chambered: 1
   ignoredColliders:
   - {fileID: 2600334668805058495}
   - {fileID: 8151771521099588490}
-  - {fileID: 4052793636821636408}
+  - {fileID: 0}
   - {fileID: 8694486143881342137}
   - {fileID: 6178325092126265397}
   - {fileID: 6314223076621083014}
@@ -476,7 +578,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -585,7 +687,7 @@ Transform:
   m_GameObject: {fileID: 5753888996200110348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0376, z: -0.2024}
+  m_LocalPosition: {x: 0, y: -0.0376, z: -0.192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -719,6 +821,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 532a0565c0885494695d90db92614783, type: 3}
+--- !u!4 &1717125700075589393 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2973747511590722913, guid: 532a0565c0885494695d90db92614783, type: 3}
+  m_PrefabInstance: {fileID: 4508291392931500656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4114621411826300315 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 532a0565c0885494695d90db92614783, type: 3}

@@ -11,20 +11,32 @@ public class Shotgun : MonoBehaviour
     [Header("Shotgun")]
     [SerializeField] private int pelletsPerShot = 8;
     [SerializeField] private float pelletSpeed = 35f;
-    [SerializeField] private float spreadAngle = 6f;
-    [SerializeField] private float fireCooldown = 0.6f;
+    [SerializeField] private float spreadAngle = 2.5f;
+    [SerializeField] private float fireCooldown = 0.35f;
+
+    [Header("State")]
+    [SerializeField] private bool chambered = true;
 
     [Header("Ignore Collisions With")]
     [SerializeField] private Collider[] ignoredColliders;
 
     private float nextFireTime;
 
+    public bool NeedsPump => !chambered;
+
     public void Fire()
     {
         if (Time.time < nextFireTime)
             return;
 
+        if (!chambered)
+        {
+            Debug.Log("Shotgun needs to be pumped.");
+            return;
+        }
+
         nextFireTime = Time.time + fireCooldown;
+        chambered = false;
 
         if (audioSource != null && fireSound != null)
         {
@@ -39,16 +51,15 @@ public class Shotgun : MonoBehaviour
 
     private void FirePellet()
     {
+        float pitch = Random.Range(-spreadAngle, spreadAngle);
+        float yaw = Random.Range(-spreadAngle, spreadAngle);
+
         Quaternion spreadRotation =
             muzzle.rotation *
-            Quaternion.Euler(
-                Random.Range(-spreadAngle, spreadAngle),
-                Random.Range(-spreadAngle, spreadAngle),
-                0f
-            );
+            Quaternion.Euler(pitch, yaw, 0f);
 
-        // Spawn slightly in front of the muzzle
-        Vector3 spawnPosition = muzzle.position + muzzle.forward * 0.08f;
+        Vector3 spawnPosition =
+            muzzle.position + muzzle.forward * 0.12f;
 
         GameObject pellet = Instantiate(
             pelletPrefab,
@@ -61,7 +72,8 @@ public class Shotgun : MonoBehaviour
         if (rb != null)
         {
             rb.useGravity = false;
-            rb.linearVelocity = spreadRotation * Vector3.forward * pelletSpeed;
+            rb.linearVelocity =
+                spreadRotation * Vector3.forward * pelletSpeed;
         }
 
         Collider pelletCollider = pellet.GetComponent<Collider>();
@@ -80,5 +92,15 @@ public class Shotgun : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CompletePumpCycle()
+    {
+        if (chambered)
+            return;
+
+        chambered = true;
+
+        Debug.Log("Shotgun chambered.");
     }
 }
