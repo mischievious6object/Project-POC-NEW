@@ -1192,11 +1192,12 @@ MonoBehaviour:
   m_Name: MetaXREyeTrackedFoveationFeature Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXREyeTrackedFoveationFeature
   m_enabled: 0
-  nameUi: 
-  version: 
-  featureIdInternal: 
-  openxrExtensionStrings: 
-  company: 
+  nameUi: Meta XR Eye Tracked Foveation
+  version: 0.0.1
+  featureIdInternal: com.meta.openxr.feature.eyetrackedfoveation
+  openxrExtensionStrings: XR_META_foveation_eye_tracked XR_FB_eye_tracking_social
+    XR_META_vulkan_swapchain_create_info
+  company: Meta
   priority: 0
   targetOpenXRApiVersion: 
   required: 0
@@ -1527,40 +1528,38 @@ MonoBehaviour:
   m_Name: Android
   m_EditorClassIdentifier: Unity.XR.OpenXR::UnityEngine.XR.OpenXR.OpenXRSettings
   features:
-  - {fileID: 3850493620776763679}
-  - {fileID: 7354644607942193704}
-  - {fileID: 3658048864256994962}
-  - {fileID: 3342188054653191255}
-  - {fileID: -957052071444379643}
-  - {fileID: -162653535727654465}
-  - {fileID: 4012054966488766807}
+  - {fileID: -3035043193554514995}
+  - {fileID: -4414109993528488581}
   - {fileID: 3181500576412370184}
-  - {fileID: -3803023764081795414}
-  - {fileID: -9005342231812197996}
-  - {fileID: -1950912727366160815}
-  - {fileID: 4776698659010028565}
-  - {fileID: 7874362059526029088}
-  - {fileID: 3289198200594258723}
-  - {fileID: 1163811066002289606}
-  - {fileID: 8487330295779689443}
-  - {fileID: 1001652014850937420}
-  - {fileID: -1883332830115451115}
+  - {fileID: -7572093344464161392}
+  - {fileID: 6608283649294747377}
+  - {fileID: -163934278960628409}
+  - {fileID: 3407828989613408804}
+  - {fileID: 5006754436978091202}
+  - {fileID: -5000183226881491653}
+  - {fileID: -3458742264823235322}
+  - {fileID: 1244560667505261087}
+  - {fileID: 3534826138756243980}
+  - {fileID: 8270576595587019994}
+  - {fileID: 5298206625485503094}
+  - {fileID: 31537752535933812}
+  - {fileID: -5275418388116089150}
   - {fileID: 2850201847100365467}
   - {fileID: -940337632050117954}
   - {fileID: -163202819680602587}
   - {fileID: -3024495471332381236}
   - {fileID: -9005082743870480305}
   - {fileID: -1816839199905620031}
-  - {fileID: 5849281106420894366}
-  - {fileID: 4621684061945275909}
-  - {fileID: 2029991641543670463}
+  - {fileID: 4764422989050640444}
+  - {fileID: 1653779738297720005}
+  - {fileID: -434560236544848659}
   - {fileID: -446945079400968798}
   - {fileID: -1739447236946913372}
   - {fileID: 4898518699819545499}
   - {fileID: 7691552586024370857}
   - {fileID: 6011338177556425417}
   - {fileID: 8819592042388453093}
-  - {fileID: 4064079391150971076}
+  - {fileID: 2239974507806026800}
   - {fileID: -4067594346091946803}
   - {fileID: -900525712006770225}
   - {fileID: -3543899579205745611}
@@ -1572,21 +1571,23 @@ MonoBehaviour:
   - {fileID: -594522850862408598}
   - {fileID: 989035585855421308}
   - {fileID: -6382435841684244}
-  - {fileID: -4486926150888966386}
+  - {fileID: 5293957264054953076}
   - {fileID: 7294848020113865315}
   - {fileID: 5895183874979856434}
-  - {fileID: 7196971280364057519}
-  - {fileID: -68165974927200948}
-  - {fileID: -5050111962492245880}
-  - {fileID: 8600431844910706286}
+  - {fileID: -3187107618333129190}
+  - {fileID: 1445532880118929270}
+  - {fileID: 1329424485789687120}
+  - {fileID: 5490809782462435953}
+  - {fileID: -5250696172398344564}
   - {fileID: -5208176687602850739}
   - {fileID: 4543014674290392712}
   - {fileID: 6148818005038729463}
   - {fileID: 8366519329730216173}
-  - {fileID: -5141218149748395372}
+  - {fileID: -4470423511789004391}
   - {fileID: -9012749357804227931}
   - {fileID: -8685241128368029708}
   - {fileID: -6724000599650292867}
+  - {fileID: 4426855125790912368}
   customLoaderName: 
   m_renderMode: 1
   m_latencyOptimization: 0
@@ -1739,11 +1740,11 @@ MonoBehaviour:
   m_Name: DetachedOculusTouchControllerProfile Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.DetachedOculusTouchControllerProfile
   m_enabled: 0
-  nameUi: 
-  version: 
-  featureIdInternal: 
-  openxrExtensionStrings: 
-  company: 
+  nameUi: Detached Oculus Touch Controller Profile
+  version: 0.0.1
+  featureIdInternal: com.meta.openxr.feature.input.oculustouch.detached
+  openxrExtensionStrings: XR_META_detached_controllers
+  company: Meta
   priority: 0
   targetOpenXRApiVersion: 
   required: 0
@@ -2743,8 +2744,8 @@ MonoBehaviour:
   features:
   - {fileID: -4836283882807850465}
   - {fileID: 4829728203885894849}
-  - {fileID: -3803023764081795414}
-  - {fileID: -9005342231812197996}
+  - {fileID: 5789103903950118699}
+  - {fileID: 4887466890118017303}
   - {fileID: -8153338840681157133}
   - {fileID: 897331296211424348}
   - {fileID: 2745997851971514702}
@@ -2754,7 +2755,7 @@ MonoBehaviour:
   - {fileID: 928348147880120921}
   - {fileID: -1640652863154482027}
   - {fileID: 4530779205638593461}
-  - {fileID: -1883332830115451115}
+  - {fileID: 7048784291242445474}
   - {fileID: 1583137575743217769}
   - {fileID: 8641721531575103393}
   - {fileID: 1856100785629028009}
@@ -3177,6 +3178,32 @@ MonoBehaviour:
   targetOpenXRApiVersion: 
   required: 0
   customRuntimeLoaderName: 
+--- !u!114 &4887466890118017303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ae1e8c3c7a542bba339faf2e771c5a, type: 3}
+  m_Name: AndroidXRSupportFeature Standalone
+  m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRSupportFeature
+  m_enabled: 0
+  nameUi: Android XR Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.androidxr-support
+  openxrExtensionStrings: 
+  company: Unity Technologies
+  priority: 0
+  targetOpenXRApiVersion: 
+  required: 0
+  customRuntimeLoaderName: 
+  optionalFeatures: []
+  symmetricProjection: 0
+  optimizeBufferDiscards: 1
+  multiviewRenderRegionsOptimizationMode: 0
 --- !u!114 &4898518699819545499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3286,11 +3313,11 @@ MonoBehaviour:
   m_Name: ARSessionFeature Android
   m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.ARSessionFeature
   m_enabled: 0
-  nameUi: 
-  version: 
-  featureIdInternal: 
+  nameUi: 'Android XR: AR Session'
+  version: 0.1.0
+  featureIdInternal: com.unity.openxr.feature.arfoundation-androidxr-session
   openxrExtensionStrings: 
-  company: 
+  company: Unity Technologies
   priority: 0
   targetOpenXRApiVersion: 
   required: 0
@@ -3358,6 +3385,28 @@ MonoBehaviour:
   featureIdInternal: com.meta.openxr.feature.spacewarp
   openxrExtensionStrings: XR_FB_space_warp
   company: Meta
+  priority: 0
+  targetOpenXRApiVersion: 
+  required: 0
+  customRuntimeLoaderName: 
+--- !u!114 &5789103903950118699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d3bf61b014a48a2b7564c61da9d7ad, type: 3}
+  m_Name: AndroidXRPerformanceMetrics Standalone
+  m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRPerformanceMetrics
+  m_enabled: 0
+  nameUi: Android XR Performance Metrics
+  version: 0.1.0
+  featureIdInternal: com.unity.openxr.feature.androidxr-performance-metrics
+  openxrExtensionStrings: XR_ANDROID_performance_metrics
+  company: Unity Technologies
   priority: 0
   targetOpenXRApiVersion: 
   required: 0
@@ -3648,6 +3697,28 @@ MonoBehaviour:
   customRuntimeLoaderName: 
   m_MessageSeverity: 4369
   m_MessageType: 15
+--- !u!114 &7048784291242445474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c36843bac48b29469f79baf3c98f9b6, type: 3}
+  m_Name: AndroidXRHandMeshData Standalone
+  m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRHandMeshData
+  m_enabled: 0
+  nameUi: 'Android XR: Hand Mesh Data'
+  version: 0.1.0
+  featureIdInternal: com.unity.openxr.feature.androidxr-hand-mesh-data
+  openxrExtensionStrings: XR_ANDROID_hand_mesh
+  company: Unity Technologies
+  priority: 0
+  targetOpenXRApiVersion: 
+  required: 0
+  customRuntimeLoaderName: 
 --- !u!114 &7196971280364057519
 MonoBehaviour:
   m_ObjectHideFlags: 0
