@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1088150255711932629}
   - component: {fileID: 2275568219488519407}
-  - component: {fileID: 8648828627673602941}
+  - component: {fileID: 876904000423199122}
+  - component: {fileID: 8793066343827310023}
+  - component: {fileID: 8806024323889432528}
   m_Layer: 0
   m_Name: Shell
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1561895753915458861}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.61902, y: -0, z: 3.77557}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61,7 +63,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8648828627673602941
+--- !u!114 &876904000423199122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,6 +193,39 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
+--- !u!65 &8793066343827310023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561895753915458861}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.016510338, y: 0.016925614, z: 0.04376597}
+  m_Center: {x: 0, y: 0.0027577337, z: 0.012401231}
+--- !u!114 &8806024323889432528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561895753915458861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae9cd66661bfd7240bbf2c8a719cc827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunShell
 --- !u!1001 &4338795681511208428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,15 +248,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4506b114420b7e04db734e9788283b27, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.492
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4506b114420b7e04db734e9788283b27, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.244
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4506b114420b7e04db734e9788283b27, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.122
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4506b114420b7e04db734e9788283b27, type: 3}
       propertyPath: m_LocalRotation.w
@@ -255,6 +290,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4506b114420b7e04db734e9788283b27, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d825f25d1b2b57e4a86cade9c1722294, type: 2}
     - target: {fileID: 919132149155446097, guid: 4506b114420b7e04db734e9788283b27, type: 3}
       propertyPath: m_Name
       value: shell

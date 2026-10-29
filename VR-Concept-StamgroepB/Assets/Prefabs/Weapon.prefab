@@ -153,7 +153,8 @@ MonoBehaviour:
   forwardThreshold: 0.15
   enableTwoHandAim: 1
   audioSource: {fileID: 264824257434736518}
-  rackSound: {fileID: 8300000, guid: 0326597434469f74797df856c11edbb4, type: 3}
+  pumpBackSound: {fileID: 8300000, guid: e16681a3a48d0d545bc8ee9d38d28264, type: 3}
+  pumpForwardSound: {fileID: 8300000, guid: 863b79f30565ebb4bbbb12ba5361fa4e, type: 3}
 --- !u!1 &529705453545688211
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +557,8 @@ MonoBehaviour:
   pelletSpeed: 30
   spreadAngle: 2
   fireCooldown: 0.5
+  capacity: 5
+  currentAmmo: 0
   chambered: 1
   ignoredColliders:
   - {fileID: 2600334668805058495}
@@ -702,6 +705,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3650578761776895370}
+  - component: {fileID: 6141650597084087056}
+  - component: {fileID: 184951783946789650}
   m_Layer: 0
   m_Name: ReloadInput
   m_TagString: Untagged
@@ -718,12 +723,46 @@ Transform:
   m_GameObject: {fileID: 6036985926789144937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.002, y: -0.036, z: -0.0678}
+  m_LocalPosition: {x: -0.002, y: -0.0447, z: -0.064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3458285513965635401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6141650597084087056
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036985926789144937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.026067277, y: 0.032178752, z: 0.043599848}
+  m_Center: {x: 0.0018438583, y: 0.009351825, z: 0.0062805256}
+--- !u!114 &184951783946789650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036985926789144937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0320535802f6c49bce670c7051b6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunReloadPort
+  shotgun: {fileID: 1457688358186208501}
 --- !u!1001 &4508291392931500656
 PrefabInstance:
   m_ObjectHideFlags: 0
