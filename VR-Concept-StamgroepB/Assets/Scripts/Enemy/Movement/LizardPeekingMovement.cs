@@ -24,6 +24,7 @@ public class LizardPeekingMovement : MonoBehaviour
 
     public void StopPeeking()
     {
+        if (_peekingCoroutine == null) return;
         StopCoroutine(_peekingCoroutine);
     }
 
