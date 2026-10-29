@@ -5,6 +5,7 @@ public class Shotgun : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform muzzle;
     [SerializeField] private GameObject pelletPrefab;
+
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip fireSound;
 
@@ -14,6 +15,10 @@ public class Shotgun : MonoBehaviour
     [SerializeField] private float spreadAngle = 2.5f;
     [SerializeField] private float fireCooldown = 0.35f;
 
+    [Header("Ammo")]
+    [SerializeField] private int capacity = 4;
+    [SerializeField] private int currentAmmo = 4;
+
     [Header("State")]
     [SerializeField] private bool chambered = true;
 
@@ -22,6 +27,8 @@ public class Shotgun : MonoBehaviour
 
     private float nextFireTime;
 
+    public int CurrentAmmo => currentAmmo;
+    public int Capacity => capacity;
     public bool NeedsPump => !chambered;
 
     public void Fire()
@@ -35,7 +42,18 @@ public class Shotgun : MonoBehaviour
             return;
         }
 
-        nextFireTime = Time.time + fireCooldown;
+        if (currentAmmo <= 0)
+        {
+            Debug.Log("Shotgun is empty.");
+            chambered = false;
+            return;
+        }
+
+        nextFireTime =
+            Time.time + fireCooldown;
+
+        currentAmmo--;
+
         chambered = false;
 
         if (audioSource != null && fireSound != null)
@@ -47,57 +65,112 @@ public class Shotgun : MonoBehaviour
         {
             FirePellet();
         }
+
+        Debug.Log(
+            "BANG! Ammo: " +
+            currentAmmo +
+            "/" +
+            capacity
+        );
     }
 
     private void FirePellet()
     {
-        float pitch = Random.Range(-spreadAngle, spreadAngle);
-        float yaw = Random.Range(-spreadAngle, spreadAngle);
+        float pitch =
+            Random.Range(-spreadAngle, spreadAngle);
+
+        float yaw =
+            Random.Range(-spreadAngle, spreadAngle);
 
         Quaternion spreadRotation =
             muzzle.rotation *
-            Quaternion.Euler(pitch, yaw, 0f);
+            Quaternion.Euler(
+                pitch,
+                yaw,
+                0f
+            );
 
         Vector3 spawnPosition =
-            muzzle.position + muzzle.forward * 0.12f;
+            muzzle.position +
+            muzzle.forward * 0.12f;
 
-        GameObject pellet = Instantiate(
-            pelletPrefab,
-            spawnPosition,
-            spreadRotation
-        );
+        GameObject pellet =
+            Instantiate(
+                pelletPrefab,
+                spawnPosition,
+                spreadRotation
+            );
 
-        Rigidbody rb = pellet.GetComponent<Rigidbody>();
+        Rigidbody rb =
+            pellet.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
             rb.useGravity = false;
+
             rb.linearVelocity =
-                spreadRotation * Vector3.forward * pelletSpeed;
+                spreadRotation *
+                Vector3.forward *
+                pelletSpeed;
         }
 
-        Collider pelletCollider = pellet.GetComponent<Collider>();
+        Collider pelletCollider =
+            pellet.GetComponent<Collider>();
 
         if (pelletCollider != null)
         {
-            foreach (Collider ignored in ignoredColliders)
+            foreach (
+                Collider ignored
+                in ignoredColliders
+            )
             {
-                if (ignored != null)
-                {
-                    Physics.IgnoreCollision(
-                        pelletCollider,
-                        ignored,
-                        true
-                    );
-                }
+                if (ignored == null)
+                    continue;
+
+                Physics.IgnoreCollision(
+                    pelletCollider,
+                    ignored,
+                    true
+                );
             }
         }
     }
 
+    public bool CanLoadShell()
+    {
+        return currentAmmo < capacity;
+    }
+
+    public bool LoadShell()
+    {
+        if (!CanLoadShell())
+        {
+            Debug.Log("Shotgun is full.");
+            return false;
+        }
+
+        currentAmmo++;
+
+        Debug.Log(
+            "Shell loaded. Ammo: " +
+            currentAmmo +
+            "/" +
+            capacity
+        );
+
+        return true;
+    }
+
     public void CompletePumpCycle()
     {
-        if (chambered)
+        if (currentAmmo <= 0)
+        {
+            chambered = false;
+
+            Debug.Log("Racked shotgun, but no shells remain.");
+
             return;
+        }
 
         chambered = true;
 
