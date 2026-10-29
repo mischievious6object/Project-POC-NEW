@@ -6,16 +6,12 @@ public class GameManager : MonoBehaviour
     private SpawnManager _spawnManager;
     private ScoreManager _scoreManager;
 
-
-    private void Awake()
+    public void StartGame()
     {
         _difficultyManager = FindFirstObjectByType<DifficultyManager>();
         _spawnManager = FindFirstObjectByType<SpawnManager>();
         _scoreManager = FindFirstObjectByType<ScoreManager>();
-    }
 
-    public void StartGame()
-    {
         _difficultyManager.StartDifficultyTimer();
         _spawnManager.StartSpawn();
         _scoreManager.ResetScore();

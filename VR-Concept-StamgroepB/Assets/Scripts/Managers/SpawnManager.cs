@@ -104,7 +104,6 @@ public class SpawnManager : MonoBehaviour
     private void StartMovement(LizardController lizard)
     {
         LizardMovementType type = (LizardMovementType)Random.Range(0, _totalMovementTypes);
-        Debug.Log(type);
         Route route;
         switch (type)
         {
