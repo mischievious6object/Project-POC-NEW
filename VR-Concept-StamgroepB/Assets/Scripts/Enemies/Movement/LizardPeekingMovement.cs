@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Random = UnityEngine.Random;
+
 public class LizardPeekingMovement : MonoBehaviour
 {
     public event Action OnMovementFinished;
@@ -15,9 +17,9 @@ public class LizardPeekingMovement : MonoBehaviour
         _controller = GetComponent<LizardController>();
     }
 
-    public void StartPeeking(List<Vector3> peekPositions)
+    public void StartMoving(Route route)
     {
-        _peekingCoroutine = StartCoroutine(PeekingRoutine(peekPositions));
+        _peekingCoroutine = StartCoroutine(PeekingRoutine(route));
     }
 
     public void StopPeeking()
@@ -25,17 +27,16 @@ public class LizardPeekingMovement : MonoBehaviour
         StopCoroutine(_peekingCoroutine);
     }
 
-    private IEnumerator PeekingRoutine(List<Vector3> peekPositions)
+    private IEnumerator PeekingRoutine(Route route)
     {
-        Vector3 startPosition = transform.position;
-        int peekTimes = UnityEngine.Random.Range(_controller.Data.MinPeeks, _controller.Data.MaxPeeks + 1);
+        int peekTimes = Random.Range(_controller.Data.MinPeeks, _controller.Data.MaxPeeks + 1);
         while (peekTimes > 0)
         {
-            Vector3 targetPosition = GetPositionToPeek(peekPositions);
+            Vector3 targetPosition = GetPositionToPeek(route.Waypoints);
             yield return Wait();
             yield return MoveToPosition(targetPosition);
             yield return Wait();
-            yield return MoveToPosition(startPosition);
+            yield return MoveToPosition(route.StartPosition);
 
             peekTimes--;
         }
@@ -54,13 +55,13 @@ public class LizardPeekingMovement : MonoBehaviour
 
     private Vector3 GetPositionToPeek(List<Vector3> peekPositions)
     {
-        int index = UnityEngine.Random.Range(0, peekPositions.Count);
+        int index = Random.Range(0, peekPositions.Count);
         return peekPositions[index];
     }
 
     private IEnumerator Wait()
     {
-        float waitTime = UnityEngine.Random.Range(_controller.Data.MinWaitTime, _controller.Data.MaxWaitTime);
+        float waitTime = Random.Range(_controller.Data.MinWaitTime, _controller.Data.MaxWaitTime);
         float timer = 0f;
         while (timer < waitTime)
         {

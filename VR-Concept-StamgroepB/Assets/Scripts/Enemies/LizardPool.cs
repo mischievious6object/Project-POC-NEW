@@ -2,21 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class LizardSpawner : MonoBehaviour
+public class LizardPool : MonoBehaviour
 {
 
-    [SerializeField] private List<LizardData> _lizardTypes = new();
-
-    private int _countPerType = 10;
+    private int _countPerType = 25;
     private Dictionary<LizardData, List<LizardController>> _lizardsPool = new();
 
-    
-    private void Start()
-    {
-        SetupPool();
-    }
-
-    public LizardController SpawnLizard(LizardData type)
+    public LizardController GetFromPool(LizardData type)
     {
         if (!_lizardsPool[type].Any())
         {
@@ -25,8 +17,6 @@ public class LizardSpawner : MonoBehaviour
 
         LizardController lizard = _lizardsPool[type].First();
         _lizardsPool[type].Remove(lizard);
-        lizard.gameObject.SetActive(true);
-        lizard.Initialize();
         return lizard;
     }
 
@@ -36,9 +26,9 @@ public class LizardSpawner : MonoBehaviour
         _lizardsPool[lizard.Data].Add(lizard);
     }
 
-    private void SetupPool()
+    public void SetupPool(List<LizardData> types)
     {
-        foreach (LizardData type in _lizardTypes)
+        foreach (LizardData type in types)
         {
             _lizardsPool[type] = new();
             for(int i = 0; i < _countPerType; i++)

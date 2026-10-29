@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LizardLinearMovement : MonoBehaviour
 {
-    public event Action OnDestinationReached;
+    public event Action OnMovementFinished;
 
     private bool _isMoving = false;
     private int _currentIndex = 0;
-    private List<Vector3> _waypoints = new();
+    private Route _route;
     private LizardController _controller;
 
 
@@ -23,9 +23,9 @@ public class LizardLinearMovement : MonoBehaviour
         Move();
     }
 
-    public void StartMoving(List<Vector3> waypoints)
+    public void StartMoving(Route route)
     {
-        _waypoints = new(waypoints);
+        _route = route;
         _currentIndex = 0;
         _isMoving = true;
     }
@@ -38,7 +38,7 @@ public class LizardLinearMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 targetPosition = _waypoints[_currentIndex];
+        Vector3 targetPosition = _route.Waypoints[_currentIndex];
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, _controller.Data.Speed * Time.deltaTime);
 
@@ -46,10 +46,10 @@ public class LizardLinearMovement : MonoBehaviour
         {
             _currentIndex++;
 
-            if (_currentIndex >= _waypoints.Count)
+            if (_currentIndex >= _route.Waypoints.Count)
             {
                 _isMoving = false;
-                OnDestinationReached?.Invoke();
+                OnMovementFinished?.Invoke();
             }
         }
     }
