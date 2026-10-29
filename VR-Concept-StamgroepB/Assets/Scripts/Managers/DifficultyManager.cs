@@ -47,7 +47,7 @@ public class DifficultyManager : MonoBehaviour
         _killsCounter++;
         if(_killsCounter == _killsForDifficultyIncrease)
         {
-            _killsCounter--;
+            _killsCounter = 0;
             OnDifficultyIncreased?.Invoke();
         }
     }

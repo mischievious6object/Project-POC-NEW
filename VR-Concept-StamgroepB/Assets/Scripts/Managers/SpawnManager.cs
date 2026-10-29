@@ -58,7 +58,10 @@ public class SpawnManager : MonoBehaviour
 
     public void ResetSpawner()
     {
-        StopCoroutine(_spawnRoutine);
+        if (_spawnRoutine != null)
+        {
+            StopCoroutine(_spawnRoutine);
+        }
 
         _currentMaxLizards = _initialMaxLizards;
         List<LizardController> lizardsToDespawn = new(_currentLizards);
