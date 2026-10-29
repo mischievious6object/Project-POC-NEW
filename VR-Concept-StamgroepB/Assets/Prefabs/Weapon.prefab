@@ -142,16 +142,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PumpAction
   shotgun: {fileID: 1457688358186208501}
-  shotgunGrab: {fileID: 8738670150049159453}
   weaponRoot: {fileID: 3458285513965635401}
-  primaryGripPoint: {fileID: 5263092041064966819}
-  pumpGripPoint: {fileID: 312105688993290935}
   pumpVisual: {fileID: 1717125700075589393}
   localSlideAxis: {x: 0, y: 0, z: -0.01}
   travelDistance: 0.01
   rearThreshold: 0.85
   forwardThreshold: 0.15
-  enableTwoHandAim: 1
   audioSource: {fileID: 264824257434736518}
   pumpBackSound: {fileID: 8300000, guid: e16681a3a48d0d545bc8ee9d38d28264, type: 3}
   pumpForwardSound: {fileID: 8300000, guid: 863b79f30565ebb4bbbb12ba5361fa4e, type: 3}
@@ -558,7 +554,7 @@ MonoBehaviour:
   spreadAngle: 2
   fireCooldown: 0.5
   capacity: 5
-  currentAmmo: 0
+  currentAmmo: 5
   chambered: 1
   ignoredColliders:
   - {fileID: 2600334668805058495}
