@@ -11,26 +11,35 @@ public class DifficultyManager : MonoBehaviour
     private int _killsCounter;
 
     private Timer _timer;
-    private LizardsManager _lizardsManager;
+    private SpawnManager _lizardsManager;
 
     private void Awake()
     {
         _timer = GetComponent<Timer>();
-        _lizardsManager = FindFirstObjectByType<LizardsManager>();
+        _lizardsManager = FindFirstObjectByType<SpawnManager>();
     }
 
     private void Start()
     {
         _lizardsManager.OnLizardKilled += LizardKilled;
         _timer.OnTimerFinished += TimerFinished;
-
-        _timer.StartTimer(_timeForDiffucultyIncrease);
     }
 
     private void OnDestroy()
     {
         _lizardsManager.OnLizardKilled -= LizardKilled;
         _timer.OnTimerFinished -= TimerFinished;
+    }
+
+    public void StartDifficultyTimer()
+    {
+        _timer.StartTimer(_timeForDiffucultyIncrease);
+    }
+
+    public void ResetDifficulty()
+    {
+        _timer.StopTimer();
+        _killsCounter = 0;
     }
 
     private void LizardKilled(LizardController controller)

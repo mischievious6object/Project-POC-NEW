@@ -5,7 +5,7 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-public class LizardsManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     public List<LizardData> LizardTypes => _lizardTypes;
 
@@ -51,18 +51,15 @@ public class LizardsManager : MonoBehaviour
         _difficultyManager.OnDifficultyIncreased -= DifficultyIncreased;
     }
 
-    public void StartSpawning()
+    public void StartSpawn()
     {
         _spawnRoutine = StartCoroutine(SpawnRoutine());
     }
 
-    public void StopSpawning()
+    public void ResetSpawner()
     {
         StopCoroutine(_spawnRoutine);
-    }
 
-    public void Reset()
-    {
         _currentMaxLizards = _initialMaxLizards;
         List<LizardController> lizardsToDespawn = new(_currentLizards);
         foreach (LizardController lizardController in lizardsToDespawn)
