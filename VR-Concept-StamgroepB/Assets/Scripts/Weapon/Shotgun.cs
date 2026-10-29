@@ -66,6 +66,10 @@ public class Shotgun : MonoBehaviour
             FirePellet();
         }
 
+        //update both huds
+        TVDisplay.Instance.ammoAmount.text = currentAmmo.ToString();
+        ShotgunHUD.Instance.ammoAmount.text = currentAmmo.ToString();
+
         Debug.Log(
             "BANG! Ammo: " +
             currentAmmo +

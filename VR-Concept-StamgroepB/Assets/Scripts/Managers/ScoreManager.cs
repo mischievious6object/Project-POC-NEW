@@ -37,6 +37,8 @@ public class ScoreManager : MonoBehaviour
     {
         _currentScore = score;
         _scoreText.text = $"{score}";
+        //show the score to the display
+        TVDisplay.Instance.scoreAmount.text = score.ToString();
     }
 
     private void LizardKilled(LizardController lizard) => AddScore(lizard.Data.Score);
