@@ -16,8 +16,8 @@ public class Shotgun : MonoBehaviour
     [SerializeField] private float fireCooldown = 0.35f;
 
     [Header("Ammo")]
-    [SerializeField] private int capacity = 4;
-    [SerializeField] private int currentAmmo = 4;
+    [SerializeField] private int capacity = 5;
+    [SerializeField] private int currentAmmo = 5;
 
     [Header("State")]
     [SerializeField] private bool chambered = true;

@@ -42,7 +42,6 @@ public class BeltShellSpawner : MonoBehaviour
         if (activeShellCount >= maxActiveShells)
             return;
 
-        // Spawn as a CHILD of the belt spawn point.
         currentBeltShell = Instantiate(
             shellPrefab,
             spawnPoint
@@ -53,7 +52,6 @@ public class BeltShellSpawner : MonoBehaviour
 
         activeShellCount++;
 
-        // Freeze it onto the belt until grabbed.
         Rigidbody rb =
             currentBeltShell.GetComponent<Rigidbody>();
 
@@ -112,10 +110,8 @@ public class BeltShellSpawner : MonoBehaviour
             grab.selectEntered.RemoveListener(OnShellGrabbed);
         }
 
-        // Detach it from the player's belt.
         grabbedShell.transform.SetParent(null, true);
 
-        // Give physics back to the shell.
         Rigidbody rb =
             grabbedShell.GetComponent<Rigidbody>();
 

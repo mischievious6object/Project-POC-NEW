@@ -7,10 +7,7 @@ public class PumpAction : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Shotgun shotgun;
-    [SerializeField] private XRGrabInteractable shotgunGrab;
     [SerializeField] private Transform weaponRoot;
-    [SerializeField] private Transform primaryGripPoint;
-    [SerializeField] private Transform pumpGripPoint;
     [SerializeField] private Transform pumpVisual;
 
     [Header("Pump Movement")]
@@ -24,9 +21,6 @@ public class PumpAction : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float forwardThreshold = 0.15f;
 
-    [Header("Two-Hand Aiming")]
-    [SerializeField] private bool enableTwoHandAim = true;
-
     [Header("Pump Sounds")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip pumpBackSound;
@@ -38,47 +32,18 @@ public class PumpAction : MonoBehaviour
     private Vector3 startingPumpLocalPosition;
     private Vector3 initialPumpHandLocalPosition;
 
-    private Vector3 localTwoHandDirection;
-    private Vector3 localUpDirection;
-
     private bool isPumpGrabbed;
     private bool reachedRear;
     private bool playedRearSound;
-
-    private bool originalTrackRotation;
 
     private void Awake()
     {
         pumpInteractable = GetComponent<XRSimpleInteractable>();
 
-        if (weaponRoot == null && shotgun != null)
-            weaponRoot = shotgun.transform;
-
         if (pumpVisual == null)
             pumpVisual = transform;
 
         startingPumpLocalPosition = pumpVisual.localPosition;
-
-        if (
-            weaponRoot != null &&
-            primaryGripPoint != null &&
-            pumpGripPoint != null
-        )
-        {
-            Vector3 worldGripDirection =
-                (pumpGripPoint.position - primaryGripPoint.position).normalized;
-
-            localTwoHandDirection =
-                weaponRoot.InverseTransformDirection(worldGripDirection);
-
-            localUpDirection =
-                weaponRoot.InverseTransformDirection(primaryGripPoint.up);
-        }
-
-        if (shotgunGrab != null)
-        {
-            originalTrackRotation = shotgunGrab.trackRotation;
-        }
     }
 
     private void OnEnable()
@@ -97,22 +62,12 @@ public class PumpAction : MonoBehaviour
 
         pumpInteractable.selectEntered.RemoveListener(OnPumpGrabbed);
         pumpInteractable.selectExited.RemoveListener(OnPumpReleased);
-
-        if (shotgunGrab != null)
-        {
-            shotgunGrab.trackRotation = originalTrackRotation;
-        }
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (!isPumpGrabbed || pumpInteractor == null)
             return;
-
-        if (enableTwoHandAim)
-        {
-            UpdateTwoHandAim();
-        }
 
         UpdatePumpSlide();
     }
@@ -130,15 +85,6 @@ public class PumpAction : MonoBehaviour
 
         reachedRear = false;
         playedRearSound = false;
-
-        // IMPORTANT:
-        // Stop XRI from forcing the shotgun to follow
-        // the primary controller's rotation.
-        if (shotgunGrab != null)
-        {
-            originalTrackRotation = shotgunGrab.trackRotation;
-            shotgunGrab.trackRotation = false;
-        }
     }
 
     private void OnPumpReleased(SelectExitEventArgs args)
@@ -147,74 +93,7 @@ public class PumpAction : MonoBehaviour
         isPumpGrabbed = false;
 
         ReturnPumpForward();
-
-        // Give rotation control back to the normal XR grab.
-        if (shotgunGrab != null)
-        {
-            shotgunGrab.trackRotation = originalTrackRotation;
-        }
     }
-
-    // --------------------------------------------------
-    // TWO-HANDED AIMING
-    // --------------------------------------------------
-
-    private void UpdateTwoHandAim()
-    {
-        if (shotgunGrab == null)
-            return;
-
-        if (shotgunGrab.interactorsSelecting.Count == 0)
-            return;
-
-        IXRSelectInteractor primaryInteractor =
-            shotgunGrab.interactorsSelecting[0];
-
-        Transform primaryHand =
-            primaryInteractor.GetAttachTransform(shotgunGrab);
-
-        Transform secondaryHand =
-            pumpInteractor.GetAttachTransform(pumpInteractable);
-
-        Vector3 handDirection =
-            secondaryHand.position - primaryHand.position;
-
-        if (handDirection.sqrMagnitude < 0.001f)
-            return;
-
-        handDirection.Normalize();
-
-        // Build the rotation that points the shotgun
-        // from the primary grip toward the pump hand.
-        Quaternion localReferenceRotation =
-            Quaternion.LookRotation(
-                localTwoHandDirection,
-                localUpDirection
-            );
-
-        Quaternion desiredWorldRotation =
-            Quaternion.LookRotation(
-                handDirection,
-                primaryHand.up
-            );
-
-        Quaternion targetWeaponRotation =
-            desiredWorldRotation *
-            Quaternion.Inverse(localReferenceRotation);
-
-        weaponRoot.rotation = targetWeaponRotation;
-
-        // After rotating, keep the trigger-hand grip
-        // exactly attached to the primary controller.
-        Vector3 positionCorrection =
-            primaryHand.position - primaryGripPoint.position;
-
-        weaponRoot.position += positionCorrection;
-    }
-
-    // --------------------------------------------------
-    // PUMP MOVEMENT
-    // --------------------------------------------------
 
     private void UpdatePumpSlide()
     {
@@ -248,7 +127,6 @@ public class PumpAction : MonoBehaviour
         float normalizedPumpPosition =
             clampedDistance / travelDistance;
 
-        // Pump reaches rear.
         if (
             normalizedPumpPosition >= rearThreshold &&
             !playedRearSound
@@ -263,7 +141,6 @@ public class PumpAction : MonoBehaviour
             }
         }
 
-        // Pump returns fully forward.
         if (
             reachedRear &&
             normalizedPumpPosition <= forwardThreshold
