@@ -7,20 +7,10 @@ public class PumpAction : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Shotgun shotgun;
-
-    // XR Grab Interactable on the root Weapon object.
     [SerializeField] private XRGrabInteractable shotgunGrab;
-
-    // Root transform of the complete shotgun.
     [SerializeField] private Transform weaponRoot;
-
-    // Primary hand grip / trigger hand point.
     [SerializeField] private Transform primaryGripPoint;
-
-    // Fixed off-hand grip point on the pump.
     [SerializeField] private Transform pumpGripPoint;
-
-    // Actual pump mesh/bone that should visually slide.
     [SerializeField] private Transform pumpVisual;
 
     [Header("Pump Movement")]
@@ -37,9 +27,10 @@ public class PumpAction : MonoBehaviour
     [Header("Two-Hand Aiming")]
     [SerializeField] private bool enableTwoHandAim = true;
 
-    [Header("Sound")]
+    [Header("Pump Sounds")]
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip rackSound;
+    [SerializeField] private AudioClip pumpBackSound;
+    [SerializeField] private AudioClip pumpForwardSound;
 
     private XRSimpleInteractable pumpInteractable;
     private IXRSelectInteractor pumpInteractor;
@@ -52,6 +43,9 @@ public class PumpAction : MonoBehaviour
 
     private bool isPumpGrabbed;
     private bool reachedRear;
+    private bool playedRearSound;
+
+    private bool originalTrackRotation;
 
     private void Awake()
     {
@@ -80,6 +74,11 @@ public class PumpAction : MonoBehaviour
             localUpDirection =
                 weaponRoot.InverseTransformDirection(primaryGripPoint.up);
         }
+
+        if (shotgunGrab != null)
+        {
+            originalTrackRotation = shotgunGrab.trackRotation;
+        }
     }
 
     private void OnEnable()
@@ -98,6 +97,11 @@ public class PumpAction : MonoBehaviour
 
         pumpInteractable.selectEntered.RemoveListener(OnPumpGrabbed);
         pumpInteractable.selectExited.RemoveListener(OnPumpReleased);
+
+        if (shotgunGrab != null)
+        {
+            shotgunGrab.trackRotation = originalTrackRotation;
+        }
     }
 
     private void LateUpdate()
@@ -125,6 +129,16 @@ public class PumpAction : MonoBehaviour
             weaponRoot.InverseTransformPoint(pumpHand.position);
 
         reachedRear = false;
+        playedRearSound = false;
+
+        // IMPORTANT:
+        // Stop XRI from forcing the shotgun to follow
+        // the primary controller's rotation.
+        if (shotgunGrab != null)
+        {
+            originalTrackRotation = shotgunGrab.trackRotation;
+            shotgunGrab.trackRotation = false;
+        }
     }
 
     private void OnPumpReleased(SelectExitEventArgs args)
@@ -133,6 +147,12 @@ public class PumpAction : MonoBehaviour
         isPumpGrabbed = false;
 
         ReturnPumpForward();
+
+        // Give rotation control back to the normal XR grab.
+        if (shotgunGrab != null)
+        {
+            shotgunGrab.trackRotation = originalTrackRotation;
+        }
     }
 
     // --------------------------------------------------
@@ -164,6 +184,8 @@ public class PumpAction : MonoBehaviour
 
         handDirection.Normalize();
 
+        // Build the rotation that points the shotgun
+        // from the primary grip toward the pump hand.
         Quaternion localReferenceRotation =
             Quaternion.LookRotation(
                 localTwoHandDirection,
@@ -182,7 +204,8 @@ public class PumpAction : MonoBehaviour
 
         weaponRoot.rotation = targetWeaponRotation;
 
-        // Keep the primary grip locked to the primary controller.
+        // After rotating, keep the trigger-hand grip
+        // exactly attached to the primary controller.
         Vector3 positionCorrection =
             primaryHand.position - primaryGripPoint.position;
 
@@ -225,28 +248,38 @@ public class PumpAction : MonoBehaviour
         float normalizedPumpPosition =
             clampedDistance / travelDistance;
 
-        // Pump has reached the back.
-        if (normalizedPumpPosition >= rearThreshold)
+        // Pump reaches rear.
+        if (
+            normalizedPumpPosition >= rearThreshold &&
+            !playedRearSound
+        )
         {
             reachedRear = true;
+            playedRearSound = true;
+
+            if (audioSource != null && pumpBackSound != null)
+            {
+                audioSource.PlayOneShot(pumpBackSound);
+            }
         }
 
-        // Pump was pulled back, then pushed forward again.
+        // Pump returns fully forward.
         if (
             reachedRear &&
             normalizedPumpPosition <= forwardThreshold
         )
         {
             reachedRear = false;
+            playedRearSound = false;
+
+            if (audioSource != null && pumpForwardSound != null)
+            {
+                audioSource.PlayOneShot(pumpForwardSound);
+            }
 
             if (shotgun != null)
             {
                 shotgun.CompletePumpCycle();
-            }
-
-            if (audioSource != null && rackSound != null)
-            {
-                audioSource.PlayOneShot(rackSound);
             }
 
             Debug.Log("Shotgun racked.");
@@ -258,7 +291,7 @@ public class PumpAction : MonoBehaviour
         pumpVisual.localPosition =
             startingPumpLocalPosition;
 
-        // Releasing the pump does NOT count as completing the rack.
         reachedRear = false;
+        playedRearSound = false;
     }
 }
