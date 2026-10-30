@@ -149,7 +149,7 @@ MonoBehaviour:
   rearThreshold: 0.85
   forwardThreshold: 0.15
   audioSource: {fileID: 264824257434736518}
-  pumpBackSound: {fileID: 8300000, guid: e16681a3a48d0d545bc8ee9d38d28264, type: 3}
+  pumpBackSound: {fileID: 8300000, guid: 4f801d953d683d045a18b57a73ce3480, type: 3}
   pumpForwardSound: {fileID: 8300000, guid: 863b79f30565ebb4bbbb12ba5361fa4e, type: 3}
 --- !u!1 &529705453545688211
 GameObject:
@@ -488,7 +488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3186495700466884300}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.127, y: 1.334, z: 0.763}
   m_LocalScale: {x: 1.66, y: 1.66, z: 1.66}
   m_ConstrainProportionsScale: 1
@@ -795,8 +795,8 @@ MonoBehaviour:
   pelletSpeed: 30
   spreadAngle: 2
   fireCooldown: 0.5
-  capacity: 5
-  currentAmmo: 0
+  capacity: 6
+  currentAmmo: 6
   chambered: 1
   ignoredColliders:
   - {fileID: 2600334668805058495}
@@ -1046,7 +1046,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a518c3053e226148970085619eaf4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  ammoAmount: {fileID: 0}
+  shotgun: {fileID: 1457688358186208501}
+  ammoAmount: {fileID: 5945540239222061932}
 --- !u!1001 &4508291392931500656
 PrefabInstance:
   m_ObjectHideFlags: 0

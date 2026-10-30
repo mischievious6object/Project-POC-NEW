@@ -1,21 +1,16 @@
-
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ShotgunHUD : MonoBehaviour
 {
-    public static ShotgunHUD Instance { get; private set; }
+    [SerializeField] private Shotgun shotgun;
+    [SerializeField] private TMP_Text ammoAmount;
 
-    public TMP_Text ammoAmount;
-
-    private void Awake()
+    private void Update()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
+        if (shotgun == null || ammoAmount == null)
             return;
-        }
 
-        Instance = this;
+        ammoAmount.text = shotgun.CurrentAmmo.ToString();
     }
 }

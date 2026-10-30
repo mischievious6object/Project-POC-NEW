@@ -16,8 +16,8 @@ public class Shotgun : MonoBehaviour
     [SerializeField] private float fireCooldown = 0.35f;
 
     [Header("Ammo")]
-    [SerializeField] private int capacity = 5;
-    [SerializeField] private int currentAmmo = 5;
+    [SerializeField] private int capacity = 6;
+    [SerializeField] private int currentAmmo = 6;
 
     [Header("State")]
     [SerializeField] private bool chambered = true;
@@ -65,10 +65,6 @@ public class Shotgun : MonoBehaviour
         {
             FirePellet();
         }
-
-        //update both huds
-        TVDisplay.Instance.ammoAmount.text = currentAmmo.ToString();
-        ShotgunHUD.Instance.ammoAmount.text = currentAmmo.ToString();
 
         Debug.Log(
             "BANG! Ammo: " +
