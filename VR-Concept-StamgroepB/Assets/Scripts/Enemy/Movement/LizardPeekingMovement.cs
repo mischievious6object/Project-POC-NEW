@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Random = UnityEngine.Random;
+using Unity.XR.CoreUtils;
 
 public class LizardPeekingMovement : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class LizardPeekingMovement : MonoBehaviour
 
     private Coroutine _peekingCoroutine;
     private LizardController _controller;
+    private XROrigin _player;
+
 
     private void Awake()
     {
         _controller = GetComponent<LizardController>();
+        _player = FindFirstObjectByType<XROrigin>();
     }
 
     public void StartMoving(Route route)
@@ -34,10 +38,10 @@ public class LizardPeekingMovement : MonoBehaviour
         while (peekTimes > 0)
         {
             Vector3 targetPosition = GetPositionToPeek(route.Waypoints);
-            yield return Wait();
             yield return MoveToPosition(targetPosition);
             yield return Wait();
             yield return MoveToPosition(route.StartPosition);
+            yield return Wait();
 
             peekTimes--;
         }
@@ -49,6 +53,7 @@ public class LizardPeekingMovement : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, target) > 0.05f)
         {
+            RotateTowardsPlayer();
             transform.position = Vector3.MoveTowards(transform.position, target, _controller.Data.PeekingSpeed * Time.deltaTime);
             yield return null;
         }
@@ -69,6 +74,16 @@ public class LizardPeekingMovement : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+    }
+
+    private void RotateTowardsPlayer()
+    {
+        Vector3 direction = (_player.transform.position - transform.position).normalized;
+        direction.y = 0;
+
+        if (direction == Vector3.zero) return;
+
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
 }

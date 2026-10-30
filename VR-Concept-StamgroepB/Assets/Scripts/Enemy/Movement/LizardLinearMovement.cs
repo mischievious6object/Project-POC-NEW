@@ -28,6 +28,7 @@ public class LizardLinearMovement : MonoBehaviour
         _route = route;
         _currentIndex = 0;
         _isMoving = true;
+        RotateTowardsTarget();
     }
 
     public void StopMoving()
@@ -51,6 +52,21 @@ public class LizardLinearMovement : MonoBehaviour
                 _isMoving = false;
                 OnMovementFinished?.Invoke();
             }
+            else
+            {
+                RotateTowardsTarget();
+            }
         }
     }
+
+    private void RotateTowardsTarget()
+    {
+        Vector3 direction = (_route.Waypoints[_currentIndex] - transform.position).normalized;
+        direction.y = 0;
+
+        if (direction == Vector3.zero) return;
+
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
 }
