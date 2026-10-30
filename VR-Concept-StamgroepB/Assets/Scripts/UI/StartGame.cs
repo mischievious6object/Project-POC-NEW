@@ -5,9 +5,10 @@ public class StartGame : MonoBehaviour
     void Update()
     {
         //detect the X button on the left controller
-        if (OVRInput.GetDown(OVRInput.RawButton.X, OVRInput.Controller.LTouch))
+        if (OVRInput.GetDown(OVRInput.Button.Three))
         {
             gameManager.StartGame();
+            Debug.Log("Start Game");
         }
     }
 }
