@@ -269,6 +269,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5386389856232889049, guid: 67aeb081cb897104ba939be3e18bac69, type: 3}
+      propertyPath: _linearRoutes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386389856232889049, guid: 67aeb081cb897104ba939be3e18bac69, type: 3}
+      propertyPath: _peekingRoutes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8213020902930162355, guid: 67aeb081cb897104ba939be3e18bac69, type: 3}
       propertyPath: m_Name
       value: SpawnManager

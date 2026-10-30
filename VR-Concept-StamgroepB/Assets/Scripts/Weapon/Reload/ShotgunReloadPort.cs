@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class ShotgunReloadPort : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Shotgun shotgun;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip shellInsertSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +25,11 @@ public class ShotgunReloadPort : MonoBehaviour
 
         if (shotgun.LoadShell())
         {
+            if (audioSource != null && shellInsertSound != null)
+            {
+                audioSource.PlayOneShot(shellInsertSound);
+            }
+
             shell.Consume();
         }
     }

@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using TMPro;
 
@@ -18,6 +17,9 @@ public class TVDisplay : MonoBehaviour
     public TMP_Text ammoText;
     public TMP_Text ammoAmount;
 
+    [Header("References")]
+    [SerializeField] private Shotgun shotgun;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,5 +29,13 @@ public class TVDisplay : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Update()
+    {
+        if (shotgun == null || ammoAmount == null)
+            return;
+
+        ammoAmount.text = shotgun.CurrentAmmo.ToString();
     }
 }
